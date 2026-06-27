@@ -1,0 +1,2843 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTA VI — Guia de Hardware | Robzeraw</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+
+/* ===== RESET & BASE ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:#07010f;
+  color:#e8dff5;
+  font-family:'Rajdhani',sans-serif;
+  overflow-x:hidden;
+  font-size:16px;
+}
+a{text-decoration:none;color:inherit;}
+
+/* ===== CSS VARS ===== */
+:root{
+  --cyan:#00f5ff;
+  --pink:#ff006e;
+  --orange:#ff8c00;
+  --green:#39ff14;
+  --red:#ff3131;
+  --yellow:#ffe033;
+  --blue:#00a8ff;
+  --bg:#07010f;
+  --card:#0e001c;
+  --border:rgba(0,245,255,.12);
+  --dim:#7a6e90;
+}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  padding:12px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(7,1,15,.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Bebas Neue';font-size:1.5rem;letter-spacing:.2em;color:var(--cyan);}
+.nav-by{font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:.2em;color:var(--dim);}
+.nav-by b{color:var(--pink);}
+.nav-links{display:flex;gap:22px;list-style:none;}
+.nav-links a{
+  font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.2em;
+  color:var(--dim);text-transform:uppercase;transition:color .2s;
+}
+.nav-links a:hover{color:var(--cyan);}
+@media(max-width:680px){.nav-links{display:none;}.nav-by{display:none;}}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  position:relative;overflow:hidden;
+  padding:120px 20px 80px;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -5%, #5500aa 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 10% 100%, #00156e 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 90% 100%, #6e0030 0%, transparent 55%),
+    #07010f;
+}
+.hero-grid{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,245,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,245,255,.035) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+#particles{position:absolute;inset:0;z-index:2;pointer-events:none;}
+.hero-content{position:relative;z-index:3;max-width:860px;}
+.hero-eyebrow{
+  font-family:'Share Tech Mono';font-size:.68rem;letter-spacing:.4em;
+  color:var(--cyan);margin-bottom:18px;opacity:.75;
+}
+.hero-gta{
+  font-family:'Bebas Neue';
+  font-size:clamp(5.5rem,20vw,14rem);
+  line-height:.82;letter-spacing:-.01em;
+  background:linear-gradient(150deg, #ffffff 0%, var(--cyan) 35%, var(--pink) 70%, var(--orange) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 60px rgba(0,245,255,.3));
+}
+.hero-vi{
+  font-family:'Bebas Neue';
+  font-size:clamp(1rem,3vw,1.6rem);
+  letter-spacing:.55em;color:rgba(255,255,255,.3);
+  margin-top:4px;
+}
+.hero-sub{
+  margin-top:28px;font-size:clamp(1rem,2.2vw,1.35rem);font-weight:600;
+  color:#e8dff5;max-width:580px;margin-inline:auto;line-height:1.5;
+}
+.hero-sub span{color:var(--cyan);}
+.hero-date{
+  margin-top:22px;display:inline-block;
+  background:linear-gradient(135deg,var(--pink),var(--orange));
+  padding:11px 32px;font-family:'Bebas Neue';font-size:1.4rem;letter-spacing:.2em;
+  border-radius:3px;box-shadow:0 0 35px rgba(255,0,110,.4);
+}
+.hero-badges{
+  margin-top:28px;display:flex;align-items:center;justify-content:center;
+  gap:8px;flex-wrap:wrap;
+}
+.hbadge{
+  font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:.18em;
+  padding:6px 14px;border-radius:3px;border:1px solid;
+  text-transform:uppercase;font-weight:700;
+}
+.hb-yt{color:#ff4040;border-color:rgba(255,64,64,.4);background:rgba(255,64,64,.08);}
+.hb-tt{color:#00f2ea;border-color:rgba(0,242,234,.4);background:rgba(0,242,234,.07);}
+.hb-dc{color:#7289da;border-color:rgba(114,137,218,.4);background:rgba(114,137,218,.07);}
+.hero-disclaimer{
+  margin-top:20px;font-family:'Share Tech Mono';font-size:.58rem;
+  letter-spacing:.1em;color:var(--dim);opacity:.5;max-width:520px;margin-inline:auto;line-height:1.8;
+}
+.scroll-hint{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  z-index:3;display:flex;flex-direction:column;align-items:center;gap:5px;
+  opacity:.35;animation:bob 2.2s ease-in-out infinite;
+}
+.scroll-hint span{font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:.35em;color:var(--cyan);}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ===== COUNTDOWN ===== */
+.countdown-wrap{
+  background:linear-gradient(135deg,#0c001f,#180040);
+  border-top:1px solid rgba(0,245,255,.1);
+  border-bottom:1px solid rgba(0,245,255,.1);
+  padding:52px 20px;text-align:center;
+}
+.countdown-wrap .sec-label{margin-bottom:10px;}
+.countdown-wrap h2{
+  font-family:'Bebas Neue';font-size:clamp(1.5rem,4vw,2.5rem);
+  letter-spacing:.08em;margin-bottom:36px;
+}
+.countdown-wrap h2 span{color:var(--pink);}
+.cd-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.cd-block{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.cd-box{
+  font-family:'Bebas Neue';font-size:clamp(3rem,10vw,5.5rem);line-height:1;
+  min-width:110px;padding:14px 20px;text-align:center;
+  background:rgba(0,0,0,.5);
+  border:1px solid rgba(0,245,255,.25);
+  border-radius:4px;
+  color:#fff;
+  text-shadow:0 0 20px rgba(0,245,255,.6);
+  box-shadow:0 0 30px rgba(0,245,255,.06), inset 0 0 20px rgba(0,245,255,.04);
+}
+.cd-lbl{font-family:'Share Tech Mono';font-size:.62rem;letter-spacing:.35em;color:var(--dim);text-transform:uppercase;}
+.cd-sep{font-family:'Bebas Neue';font-size:4rem;color:var(--pink);opacity:.7;padding-bottom:28px;}
+.cd-note{margin-top:24px;font-family:'Share Tech Mono';font-size:.62rem;letter-spacing:.15em;color:var(--dim);opacity:.6;}
+
+/* ===== SECTIONS ===== */
+.section{padding:80px 24px;max-width:1360px;margin:0 auto;}
+.section-sm{padding:80px 24px;max-width:960px;margin:0 auto;}
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),var(--pink),var(--cyan),transparent);opacity:.18;}
+.sec-label{
+  font-family:'Share Tech Mono';font-size:.62rem;letter-spacing:.48em;
+  color:var(--cyan);text-transform:uppercase;margin-bottom:10px;display:block;
+}
+.sec-title{
+  font-family:'Bebas Neue';font-size:clamp(2.2rem,5.5vw,4.5rem);
+  line-height:1;letter-spacing:.05em;
+}
+.sec-title .ac{color:var(--cyan);}
+.sec-title .ap{color:var(--pink);}
+.sec-desc{margin-top:12px;font-size:.95rem;color:var(--dim);max-width:540px;line-height:1.7;}
+.sec-head{margin-bottom:44px;}
+.note-box{
+  margin-top:24px;padding:14px 18px;
+  background:rgba(255,140,0,.07);border:1px solid rgba(255,140,0,.22);border-left:3px solid var(--orange);
+  font-size:.82rem;color:var(--dim);line-height:1.65;
+}
+.note-box strong{color:var(--orange);}
+
+/* ===== FADE ===== */
+.fade{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease;}
+.fade.visible{opacity:1;transform:translateY(0);}
+
+/* ===== BANNER IMAGE ===== */
+.banner-img{
+  width:100%;height:220px;object-fit:cover;display:block;
+  border-radius:4px;margin-bottom:40px;
+  border:1px solid var(--border);
+  filter:brightness(.65) saturate(1.4);
+}
+
+/* ===== RAGE ENGINE ===== */
+.rage-box{
+  background:linear-gradient(135deg,#0c001f,#180038);
+  border:1px solid rgba(0,245,255,.1);border-radius:4px;
+  padding:40px 30px;position:relative;overflow:hidden;
+}
+.rage-box::after{
+  content:'RAGE9';position:absolute;right:-15px;top:50%;
+  transform:translateY(-50%) rotate(90deg);
+  font-family:'Bebas Neue';font-size:8rem;
+  color:rgba(0,245,255,.025);pointer-events:none;white-space:nowrap;
+}
+.rage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:28px;}
+.rage-item{padding:16px;border-left:3px solid var(--cyan);background:rgba(0,245,255,.025);}
+.rage-item-t{font-family:'Bebas Neue';font-size:.95rem;color:var(--cyan);letter-spacing:.1em;margin-bottom:5px;}
+.rage-item p{font-size:.8rem;color:var(--dim);line-height:1.6;}
+
+/* ===== PC TIERS LAYOUT (novo) ===== */
+.pc-layout{display:grid;grid-template-columns:220px 1fr;gap:0;margin-top:28px;background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;min-height:460px;}
+[data-theme="light"] .pc-layout{background:#fff;border-color:rgba(0,0,0,.08);box-shadow:0 2px 16px rgba(0,0,0,.06);}
+@media(max-width:720px){.pc-layout{grid-template-columns:1fr;}}
+.pc-sidebar{display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.06);}
+[data-theme="light"] .pc-sidebar{border-right-color:rgba(0,0,0,.07);}
+.pc-tab{padding:18px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .18s;user-select:none;position:relative;}
+[data-theme="light"] .pc-tab{border-bottom-color:rgba(0,0,0,.05);}
+.pc-tab:last-child{border-bottom:none;}
+.pc-tab::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:transparent;transition:background .18s;}
+.pc-tab.active::after{background:var(--tab-col,var(--cyan));}
+.pc-tab.active{background:rgba(255,255,255,.04);}
+[data-theme="light"] .pc-tab.active{background:rgba(0,0,0,.03);}
+.pc-tab:hover:not(.active){background:rgba(255,255,255,.02);}
+.pc-tab-badge{font-family:'Share Tech Mono';font-size:.54rem;letter-spacing:.14em;padding:3px 7px;border-radius:2px;border:1px solid;white-space:nowrap;}
+.pc-tab-name{font-family:'Bebas Neue';font-size:1.1rem;letter-spacing:.06em;line-height:1;}
+.pc-tab-fps{font-family:'Share Tech Mono';font-size:.52rem;letter-spacing:.07em;color:var(--dim);margin-top:2px;}
+.pc-content{overflow:auto;}
+.pc-panel{display:none;height:100%;}
+.pc-panel.active{display:flex;flex-direction:column;}
+.pc-panel-img{width:100%;height:170px;object-fit:cover;filter:brightness(.6) saturate(1.3);display:block;flex-shrink:0;}
+.pc-panel-body{padding:20px 22px;flex:1;display:flex;flex-direction:column;gap:0;}
+.pc-spec-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);gap:12px;}
+[data-theme="light"] .pc-spec-row{border-bottom-color:rgba(0,0,0,.05);}
+.pc-spec-row:last-of-type{border-bottom:none;}
+.pcsl{font-family:'Share Tech Mono';font-size:.53rem;letter-spacing:.1em;color:var(--dim);white-space:nowrap;min-width:55px;}
+.pcsv{font-size:.83rem;font-weight:600;text-align:right;line-height:1.2;}
+.pcsv small{display:block;font-size:.67rem;font-weight:400;color:var(--dim);}
+.pc-perf{margin-top:10px;padding:10px 13px;border-radius:4px;}
+.pc-perf-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+.pc-pl{font-size:.73rem;color:var(--dim);}
+.pc-pv{font-family:'Bebas Neue';font-size:1.05rem;letter-spacing:.04em;}
+.pc-bar-track{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;margin-top:5px;}
+.pc-bar-fill{height:100%;border-radius:3px;}
+.pc-price{margin-top:10px;padding:10px 13px;border-top:1px solid rgba(255,255,255,.06);}
+[data-theme="light"] .pc-price{border-top-color:rgba(0,0,0,.06);}
+.pc-price-lbl{font-family:'Share Tech Mono';font-size:.53rem;letter-spacing:.22em;color:var(--dim);margin-bottom:2px;}
+.pc-price-val{font-family:'Bebas Neue';font-size:1.5rem;letter-spacing:.04em;}
+.pc-price-note{font-size:.72rem;color:var(--dim);margin-top:2px;line-height:1.4;}
+.pc-wtag{display:inline-block;font-family:'Share Tech Mono';font-size:.54rem;letter-spacing:.06em;padding:3px 8px;border-radius:2px;margin-top:6px;border:1px solid;}
+
+/* ===== PC TIERS — ACCORDION (legado) ===== */
+.pc-grid{display:flex;flex-direction:column;gap:12px;}
+.tier-card{
+  background:var(--card);border-radius:4px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);
+  display:flex;flex-direction:column;
+  transition:box-shadow .25s;
+}
+.tier-card.open{box-shadow:0 12px 50px rgba(0,0,0,.55);}
+.tier-img{width:100%;height:200px;object-fit:cover;display:block;filter:brightness(.6) saturate(1.3);}
+.tier-head{
+  padding:18px 22px;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  user-select:none;transition:filter .2s;
+}
+.tier-head:hover{filter:brightness(1.1);}
+.tier-head-left{display:flex;align-items:center;gap:14px;}
+.tier-badge{
+  font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.22em;
+  padding:3px 8px;border-radius:2px;display:inline-block;border:1px solid;white-space:nowrap;
+}
+.tier-name{font-family:'Bebas Neue';font-size:1.75rem;letter-spacing:.07em;line-height:1;}
+.tier-head-right{display:flex;align-items:center;gap:18px;flex-shrink:0;}
+.tier-fps-preview{font-family:'Bebas Neue';font-size:1.1rem;letter-spacing:.05em;opacity:.65;}
+.tier-chevron{font-size:1.3rem;transition:transform .35s ease;color:rgba(255,255,255,.25);line-height:1;}
+.tier-card.open .tier-chevron{transform:rotate(180deg);}
+.tier-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .5s ease;
+  display:flex;flex-direction:column;
+}
+.spec-row{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);gap:10px;
+}
+.spec-row:last-of-type{border-bottom:none;}
+.sl{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.15em;color:var(--dim);white-space:nowrap;padding-top:2px;min-width:65px;}
+.sv{font-size:.81rem;font-weight:600;text-align:right;line-height:1.2;}
+.sv small{display:block;font-size:.67rem;font-weight:400;color:var(--dim);margin-top:0;}
+.perf-box{margin-top:7px;padding:9px 11px;border-radius:3px;}
+.perf-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+.pl{color:var(--dim);font-size:.73rem;}
+.pv{font-family:'Bebas Neue';font-size:1rem;letter-spacing:.05em;font-weight:700;}
+.bar-track{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;margin-top:5px;}
+.bar-fill{height:100%;border-radius:2px;}
+.price-block{margin-top:auto;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);}
+.price-lbl{font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:.25em;color:var(--dim);margin-bottom:3px;}
+.price-val{font-family:'Bebas Neue';font-size:1.65rem;letter-spacing:.04em;}
+.price-note{font-size:.7rem;color:var(--dim);margin-top:2px;line-height:1.45;}
+.wtag{display:inline-block;font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.08em;padding:3px 8px;border-radius:2px;margin-top:6px;border:1px solid;}
+
+/* tier colors */
+.t1 .tier-head{background:linear-gradient(135deg,#1a0000,#280303);}
+.t1 .tier-badge{color:var(--red);border-color:var(--red);background:rgba(255,49,49,.12);}
+.t1 .tier-name{color:var(--red);}
+.t1 .perf-box{background:rgba(255,49,49,.05);border:1px solid rgba(255,49,49,.14);}
+.t1 .bar-fill{background:var(--red);}
+.t1 .price-val{color:var(--red);}
+
+.t2 .tier-head{background:linear-gradient(135deg,#1a1100,#281900);}
+.t2 .tier-badge{color:var(--yellow);border-color:var(--yellow);background:rgba(255,224,51,.1);}
+.t2 .tier-name{color:var(--yellow);}
+.t2 .perf-box{background:rgba(255,224,51,.04);border:1px solid rgba(255,224,51,.14);}
+.t2 .bar-fill{background:var(--yellow);}
+.t2 .price-val{color:var(--yellow);}
+
+.t3 .tier-head{background:linear-gradient(135deg,#001500,#002100);}
+.t3 .tier-badge{color:var(--green);border-color:var(--green);background:rgba(57,255,20,.1);}
+.t3 .tier-name{color:var(--green);}
+.t3 .perf-box{background:rgba(57,255,20,.04);border:1px solid rgba(57,255,20,.14);}
+.t3 .bar-fill{background:var(--green);}
+.t3 .price-val{color:var(--green);}
+
+.t4 .tier-head{background:linear-gradient(135deg,#000e28,#001640);}
+.t4 .tier-badge{color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.12);box-shadow:0 0 8px rgba(0,245,255,.2);}
+.t4 .tier-name{color:var(--cyan);text-shadow:0 0 16px var(--cyan);}
+.t4 .perf-box{background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.18);}
+.t4 .bar-fill{background:linear-gradient(90deg,var(--cyan),var(--pink));}
+.t4 .price-val{color:var(--cyan);text-shadow:0 0 8px var(--cyan);}
+.t4{border-color:rgba(0,245,255,.15);}
+
+/* ===== GPU TABLE ===== */
+.gpu-wrap{overflow-x:auto;margin-top:30px;}
+.gpu-table{width:100%;border-collapse:collapse;min-width:580px;}
+.gpu-table th{
+  font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--dim);padding:10px 14px;text-align:left;
+  border-bottom:1px solid rgba(0,245,255,.15);
+}
+.gpu-table td{padding:11px 14px;font-size:.86rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
+.gpu-table tr:hover td{background:rgba(255,255,255,.02);}
+.gpu-bar{height:5px;border-radius:3px;margin-top:5px;}
+.gpu-fps{font-family:'Bebas Neue';font-size:1.05rem;letter-spacing:.04em;}
+
+/* ===== FPS CALCULATOR ===== */
+.calc-box{
+  background:linear-gradient(135deg,#0a0018,#130030);
+  border:1px solid rgba(0,245,255,.14);border-radius:4px;
+  padding:36px 30px;margin-top:24px;
+}
+.calc-row{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px;}
+@media(max-width:580px){.calc-row{grid-template-columns:1fr;}}
+.calc-group{display:flex;flex-direction:column;gap:8px;}
+.calc-lbl{font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:.28em;color:var(--cyan);text-transform:uppercase;}
+.calc-sel{
+  background:#0c0020;border:1px solid rgba(0,245,255,.22);
+  color:#e8dff5;font-family:'Rajdhani';font-size:.95rem;font-weight:600;
+  padding:10px 14px;border-radius:3px;width:100%;cursor:pointer;outline:none;
+  transition:border-color .2s;
+}
+.calc-sel:focus{border-color:var(--cyan);}
+.calc-result{
+  margin-top:22px;padding:18px 22px;
+  background:rgba(0,0,0,.4);border:1px solid rgba(0,245,255,.2);border-radius:4px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.calc-fps-big{font-family:'Bebas Neue';font-size:3.5rem;line-height:1;letter-spacing:.03em;}
+.calc-meta{display:flex;flex-direction:column;gap:5px;}
+.calc-meta-row{font-size:.83rem;color:var(--dim);}
+.calc-meta-row b{color:#e8dff5;}
+.calc-chip{
+  font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:.1em;
+  padding:3px 9px;border-radius:2px;display:inline-block;margin-top:4px;border:1px solid;
+}
+
+/* ===== CONSOLE PRICES ===== */
+.prices-bg{
+  background:linear-gradient(135deg,#080014,#0f0022);
+  border-top:1px solid rgba(255,0,110,.08);
+  border-bottom:1px solid rgba(255,0,110,.08);
+  padding:75px 24px;
+}
+.prices-inner{max-width:1200px;margin:0 auto;}
+.price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:38px;}
+.price-card{
+  background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:4px;
+  padding:22px 20px;display:flex;flex-direction:column;gap:8px;
+  transition:transform .2s;
+}
+.price-card:hover{transform:translateY(-3px);}
+.pc-platform{font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);}
+.pc-name{font-family:'Bebas Neue';font-size:1.75rem;letter-spacing:.08em;line-height:1;}
+.pc-brl{font-family:'Bebas Neue';font-size:2.4rem;letter-spacing:.04em;line-height:1.1;}
+.pc-desc{font-size:.75rem;color:var(--dim);line-height:1.55;}
+.pc-tag{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.1em;padding:3px 8px;border-radius:2px;display:inline-block;border:1px solid;margin-top:4px;}
+.pss .pc-name,.pss .pc-brl{color:#6cb4f7;} .pss .pc-platform{color:#6cb4f7;}
+.psx .pc-name,.psx .pc-brl{color:var(--blue);} .psx .pc-platform{color:var(--blue);}
+.pps5 .pc-name,.pps5 .pc-brl{color:#4f8fff;} .pps5 .pc-platform{color:#4f8fff;}
+.ppro .pc-name{color:var(--cyan);text-shadow:0 0 12px var(--cyan);}
+.ppro .pc-brl{color:var(--cyan);}
+.ppro .pc-platform{color:var(--cyan);}
+.ppro{border-color:rgba(0,245,255,.2);box-shadow:0 0 24px rgba(0,245,255,.05);}
+
+/* ===== CONSOLE CARDS ===== */
+.con-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:18px;}
+.con-card{
+  background:var(--card);border-radius:4px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.07);
+  display:flex;flex-direction:column;
+  transition:transform .22s,box-shadow .22s;
+}
+.con-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.6);}
+.con-img-wrap{position:relative;height:195px;overflow:hidden;background:#000;}
+.con-img{width:100%;height:100%;object-fit:cover;filter:brightness(.6) saturate(1.2);}
+.con-img-grad{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--card) 100%);}
+.con-platform-tag{
+  position:absolute;top:11px;left:11px;
+  font-family:'Bebas Neue';font-size:.9rem;letter-spacing:.22em;
+  padding:3px 10px;border-radius:2px;
+}
+.con-body{padding:16px 20px 20px;flex:1;display:flex;flex-direction:column;}
+.con-name{font-family:'Bebas Neue';font-size:1.85rem;letter-spacing:.07em;line-height:1;margin-bottom:3px;}
+.con-sub{font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.2em;color:var(--dim);margin-bottom:16px;text-transform:uppercase;}
+.con-row{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.83rem;gap:10px;
+}
+.con-row:last-child{border-bottom:none;}
+.cl{color:var(--dim);font-size:.74rem;white-space:nowrap;}
+.cv{font-weight:600;text-align:right;}
+.cv small{display:block;color:var(--dim);font-weight:400;font-size:.7rem;}
+.pills{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+.pill{
+  padding:3px 9px;border-radius:2px;border:1px solid;
+  font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.07em;
+}
+.bug-box{margin-top:12px;padding:11px 13px;border-radius:3px;font-size:.78rem;line-height:1.6;}
+.bug-title{font-family:'Bebas Neue';font-size:.85rem;letter-spacing:.14em;margin-bottom:4px;}
+
+/* console colors */
+.css .con-platform-tag{background:rgba(0,120,215,.85);color:#fff;}
+.css .con-name{color:#6cb4f7;}.css .pill{border-color:#6cb4f7;color:#6cb4f7;}
+.css .bug-box{background:rgba(255,49,49,.06);border-left:3px solid var(--red);}.css .bug-title{color:var(--red);}
+
+.csx .con-platform-tag{background:rgba(0,120,215,.85);color:#fff;}
+.csx .con-name{color:var(--blue);}.csx .pill{border-color:var(--blue);color:var(--blue);}
+.csx .bug-box{background:rgba(255,224,51,.05);border-left:3px solid var(--yellow);}.csx .bug-title{color:var(--yellow);}
+
+.cps .con-platform-tag{background:rgba(0,70,175,.88);color:#fff;}
+.cps .con-name{color:#4f8fff;}.cps .pill{border-color:#4f8fff;color:#4f8fff;}
+.cps .bug-box{background:rgba(57,255,20,.04);border-left:3px solid var(--green);}.cps .bug-title{color:var(--green);}
+
+.cpro .con-platform-tag{background:rgba(0,90,210,.9);color:#fff;}
+.cpro .con-name{color:var(--cyan);text-shadow:0 0 12px var(--cyan);}
+.cpro .pill{border-color:var(--cyan);color:var(--cyan);}
+.cpro .bug-box{background:rgba(0,245,255,.04);border-left:3px solid var(--cyan);}.cpro .bug-title{color:var(--cyan);}
+.cpro{border-color:rgba(0,245,255,.2);box-shadow:0 0 30px rgba(0,245,255,.06);}
+.cpro .con-img-wrap::after{
+  content:'★ MELHOR';position:absolute;top:11px;right:11px;
+  font-family:'Share Tech Mono';font-size:.5rem;letter-spacing:.14em;
+  padding:3px 7px;background:rgba(0,245,255,.2);border:1px solid var(--cyan);
+  color:var(--cyan);border-radius:2px;
+}
+
+/* ===== RUMORES ===== */
+.rumor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:36px;}
+.rumor-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 16px;background:rgba(255,255,255,.022);
+  border:1px solid rgba(255,255,255,.06);border-radius:4px;
+}
+.rumor-icon{font-size:1.15rem;flex-shrink:0;margin-top:2px;}
+.rumor-t{font-weight:700;font-size:.9rem;margin-bottom:3px;}
+.rumor-d{font-size:.77rem;color:var(--dim);line-height:1.55;}
+.rtag{font-family:'Share Tech Mono';font-size:.54rem;letter-spacing:.1em;padding:2px 6px;border-radius:2px;display:inline-block;margin-top:5px;border:1px solid;}
+.r-yes{background:rgba(57,255,20,.1);color:var(--green);border-color:rgba(57,255,20,.3);}
+.r-no{background:rgba(255,49,49,.1);color:var(--red);border-color:rgba(255,49,49,.3);}
+.r-maybe{background:rgba(255,224,51,.1);color:var(--yellow);border-color:rgba(255,224,51,.3);}
+
+/* ===== VEREDICTO ===== */
+.vtable{width:100%;border-collapse:collapse;margin-top:34px;}
+.vtable th{font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);padding:10px 13px;text-align:left;border-bottom:1px solid rgba(0,245,255,.15);}
+.vtable td{padding:12px 13px;font-size:.86rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
+.vtable tr:hover td{background:rgba(255,255,255,.02);}
+.vrank{font-family:'Bebas Neue';font-size:2rem;text-align:center;}
+.vname{font-weight:700;font-size:.95rem;}
+.vnote{font-size:.75rem;color:var(--dim);}
+
+/* ===== FAQ ===== */
+.faq{display:flex;flex-direction:column;gap:8px;margin-top:36px;}
+.faq-item{background:rgba(255,255,255,.022);border:1px solid rgba(255,255,255,.07);border-radius:4px;overflow:hidden;}
+.faq-q{
+  padding:15px 20px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  font-weight:700;font-size:.92rem;user-select:none;
+  transition:background .2s;
+}
+.faq-q:hover{background:rgba(0,245,255,.04);}
+.faq-toggle{color:var(--cyan);font-family:'Bebas Neue';font-size:1.3rem;transition:transform .3s;flex-shrink:0;margin-left:12px;}
+.faq-a{
+  font-size:.85rem;color:var(--dim);line-height:1.72;
+  max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;
+  padding:0 20px;
+}
+.faq-item.open .faq-q{background:rgba(0,245,255,.05);}
+.faq-item.open .faq-toggle{transform:rotate(45deg);}
+.faq-item.open .faq-a{max-height:160px;padding:0 20px 16px;}
+
+/* ===== CANAL ===== */
+.canal-box{
+  background:linear-gradient(135deg,#0c001f,#1a0038);
+  border:1px solid rgba(255,0,110,.15);border-radius:4px;
+  padding:42px 32px;position:relative;overflow:hidden;
+}
+.canal-box::before{
+  content:'ROBZERAW';position:absolute;right:-30px;top:50%;
+  transform:translateY(-50%) rotate(90deg);
+  font-family:'Bebas Neue';font-size:8rem;
+  color:rgba(255,0,110,.03);pointer-events:none;white-space:nowrap;
+}
+.canal-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+@media(max-width:620px){.canal-cards{grid-template-columns:1fr;}}
+.canal-card{
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:4px;
+  padding:20px;display:flex;align-items:flex-start;gap:14px;
+  transition:transform .2s,border-color .2s;
+}
+.canal-card:hover{transform:translateY(-3px);border-color:rgba(255,0,110,.25);}
+.canal-icon{font-size:1.8rem;flex-shrink:0;}
+.canal-plat{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:3px;}
+.canal-name{font-family:'Bebas Neue';font-size:1.45rem;letter-spacing:.12em;margin-bottom:3px;}
+.canal-desc{font-size:.79rem;color:var(--dim);line-height:1.55;}
+.canal-btn{
+  display:inline-block;margin-top:10px;font-family:'Share Tech Mono';
+  font-size:.58rem;letter-spacing:.16em;padding:5px 12px;border-radius:2px;border:1px solid;
+  transition:background .2s;
+}
+.btn-yt{color:#ff4040;border-color:rgba(255,64,64,.35);background:rgba(255,64,64,.08);}
+.btn-tt{color:#00f2ea;border-color:rgba(0,242,234,.3);background:rgba(0,242,234,.06);}
+
+.discord-bar{
+  margin-top:20px;padding:26px 28px;
+  background:linear-gradient(135deg,#1a1d4a,#25196a);
+  border:1px solid rgba(114,137,218,.3);border-radius:4px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+}
+.dc-left{display:flex;align-items:center;gap:16px;}
+.dc-icon{font-size:2.5rem;}
+.dc-title{font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:.1em;color:#7289da;}
+.dc-sub{font-size:.82rem;color:var(--dim);margin-top:3px;}
+.dc-btn{
+  font-family:'Bebas Neue';font-size:1rem;letter-spacing:.15em;
+  padding:11px 26px;background:linear-gradient(135deg,#5865f2,#7289da);
+  color:#fff;border:none;border-radius:3px;cursor:pointer;
+  text-decoration:none;white-space:nowrap;transition:opacity .2s;
+}
+.dc-btn:hover{opacity:.85;}
+
+/* ===== FOOTER ===== */
+footer{
+  padding:52px 24px 40px;
+  border-top:1px solid rgba(0,245,255,.1);
+  text-align:center;margin-top:40px;
+}
+.footer-logo{
+  font-family:'Bebas Neue';font-size:3rem;letter-spacing:.12em;
+  background:linear-gradient(135deg,var(--cyan),var(--pink));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.footer-creator{margin-top:10px;font-family:'Bebas Neue';font-size:1.45rem;letter-spacing:.15em;color:#fff;}
+.footer-subs{display:flex;justify-content:center;gap:8px;margin:10px 0 18px;flex-wrap:wrap;}
+.fsub{
+  font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:.14em;
+  padding:5px 12px;border-radius:2px;border:1px solid;
+}
+.fy{color:#ff4040;border-color:rgba(255,64,64,.35);background:rgba(255,64,64,.08);}
+.ft{color:#00f2ea;border-color:rgba(0,242,234,.3);background:rgba(0,242,234,.06);}
+.fd{color:#7289da;border-color:rgba(114,137,218,.3);background:rgba(114,137,218,.07);}
+.footer-text{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.14em;color:var(--dim);opacity:.4;line-height:2.2;}
+
+/* ===== LIGHT THEME ===== */
+[data-theme="light"]{
+  --bg:#f2f0fc;--card:#ffffff;--card2:#ede9ff;
+  --txt:#1a0033;--dim:#6b5f80;--border:rgba(100,0,200,.14);
+}
+[data-theme="light"] body{background:#f2f0fc;color:#1a0033;}
+[data-theme="light"] nav{background:rgba(242,240,252,.97);border-bottom-color:rgba(100,0,200,.12);}
+[data-theme="light"] .nav-logo{color:#5500aa;}
+[data-theme="light"] .nav-links a{color:#6b5f80;}
+[data-theme="light"] .nav-links a:hover{color:#5500aa;}
+[data-theme="light"] .hero-bg{background:radial-gradient(ellipse 80% 50% at 50% -5%,#d0aaff 0%,transparent 60%),radial-gradient(ellipse 40% 35% at 10% 100%,#aac4ff 0%,transparent 55%),radial-gradient(ellipse 40% 35% at 90% 100%,#ffb0d0 0%,transparent 55%),#f2f0fc;}
+[data-theme="light"] .hero-gta{background:linear-gradient(150deg,#2200aa 0%,#0088cc 35%,#cc0055 70%,#cc5500 100%);-webkit-background-clip:text;background-clip:text;}
+[data-theme="light"] .hero-vi{color:rgba(0,0,0,.22);}
+[data-theme="light"] .countdown-wrap{background:linear-gradient(135deg,#ddd8f8,#ede8ff);}
+[data-theme="light"] .cd-box{background:#fff;color:#1a0033;text-shadow:none;border-color:rgba(100,0,200,.2);box-shadow:0 4px 18px rgba(100,0,200,.08);}
+[data-theme="light"] .cd-lbl{color:#8070a0;}
+[data-theme="light"] .rage-box{background:linear-gradient(135deg,#e8e0ff,#f4f0ff);border-color:rgba(100,0,200,.12);}
+[data-theme="light"] .rage-item{background:rgba(0,100,200,.04);border-left-color:rgba(0,150,200,.5);}
+[data-theme="light"] .rage-item-t{color:#0077aa;}
+[data-theme="light"] .tier-card{background:#fff;border-color:rgba(0,0,0,.07);box-shadow:0 2px 14px rgba(0,0,0,.06);}
+[data-theme="light"] .tier-head .tier-badge,[data-theme="light"] .tier-head .tier-name,[data-theme="light"] .tier-head .tier-fps-prev{filter:brightness(.8);}
+[data-theme="light"] .gpu-table th{color:#8070a0;}
+[data-theme="light"] .gpu-table td{border-bottom-color:rgba(0,0,0,.05);}
+[data-theme="light"] .gpu-table tr:hover td{background:rgba(0,0,0,.02);}
+[data-theme="light"] .calc-box{background:linear-gradient(135deg,#ece6ff,#f5f2ff);border-color:rgba(100,0,200,.15);}
+[data-theme="light"] .calc-lbl{color:#5500aa;}
+[data-theme="light"] .calc-sel{background:#fff;border-color:rgba(100,0,200,.2);color:#1a0033;}
+[data-theme="light"] .calc-result{background:rgba(255,255,255,.85);border-color:rgba(100,0,200,.15);}
+[data-theme="light"] .con-card{background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.07);}
+[data-theme="light"] .quiz-box{background:linear-gradient(135deg,#f0eaff,#fbf8ff);border-color:rgba(180,0,90,.15);}
+[data-theme="light"] .quiz-opt{background:#fff;border-color:rgba(0,0,0,.09);}
+[data-theme="light"] .quiz-opt:hover{background:rgba(255,0,110,.06);}
+[data-theme="light"] .vote-box{background:linear-gradient(135deg,#ece8ff,#f5f2ff);border-color:rgba(100,0,200,.15);}
+[data-theme="light"] .vote-btn{border-color:rgba(0,0,0,.1);color:#3a2060;}
+[data-theme="light"] .faq-item{background:#fff;border-color:rgba(0,0,0,.07);}
+[data-theme="light"] .faq-q:hover{background:rgba(0,0,0,.02);}
+[data-theme="light"] .note-box{background:rgba(255,140,0,.05);border-color:rgba(200,100,0,.2);}
+[data-theme="light"] .canal-box{background:linear-gradient(135deg,#f4eeff,#fff0f7);}
+[data-theme="light"] .canal-card{background:#fff;border-color:rgba(0,0,0,.08);}
+[data-theme="light"] .discord-bar{background:linear-gradient(135deg,#eaecff,#f0eeff);}
+[data-theme="light"] .alert-box{background:linear-gradient(135deg,#eaffee,#f5fff8);border-color:rgba(0,160,70,.15);}
+[data-theme="light"] footer{background:#e8e4f6;border-top-color:rgba(100,0,200,.1);}
+[data-theme="light"] .rumor-item{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.07);}
+[data-theme="light"] .divider{opacity:.12;}
+[data-theme="light"] .vtable th{color:#8070a0;}
+[data-theme="light"] .vtable td{border-bottom-color:rgba(0,0,0,.05);}
+
+/* ===== THEME TOGGLE BUTTON ===== */
+.theme-toggle{
+  background:none;border:1px solid rgba(0,245,255,.25);
+  width:34px;height:34px;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:all .25s;flex-shrink:0;
+}
+.theme-toggle:hover{border-color:var(--cyan);transform:rotate(20deg);background:rgba(0,245,255,.07);}
+[data-theme="light"] .theme-toggle{border-color:rgba(100,0,200,.25);}
+[data-theme="light"] .theme-toggle:hover{border-color:#5500aa;background:rgba(100,0,200,.06);}
+
+/* ===== SHARE BUTTONS ===== */
+.share-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px;}
+.share-btn{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.1em;padding:7px 14px;border-radius:3px;border:1px solid;cursor:pointer;background:none;transition:all .22s;display:flex;align-items:center;gap:5px;}
+.share-btn:hover{transform:translateY(-2px);}
+.sb-wa{color:#25d366;border-color:rgba(37,211,102,.3);}.sb-wa:hover{background:rgba(37,211,102,.08);}
+.sb-tw{color:#1da1f2;border-color:rgba(29,161,242,.3);}.sb-tw:hover{background:rgba(29,161,242,.08);}
+.sb-cp{color:var(--dim);border-color:rgba(255,255,255,.12);}.sb-cp:hover{background:rgba(255,255,255,.05);color:var(--cyan);}
+[data-theme="light"] .sb-cp{border-color:rgba(0,0,0,.1);}
+
+/* ===== LIGHTBOX ===== */
+.lightbox{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.93);
+  display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:20px;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:88vw;max-height:76vh;object-fit:contain;border-radius:4px;border:1px solid rgba(255,255,255,.1);transition:opacity .15s;}
+.lb-close{position:absolute;top:20px;right:24px;font-family:'Bebas Neue';font-size:2rem;color:#fff;cursor:pointer;opacity:.5;transition:opacity .2s;background:none;border:none;}
+.lb-close:hover{opacity:1;}
+.lb-lbl{font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.4);text-align:center;text-transform:uppercase;}
+.lb-nav{display:flex;gap:12px;}
+.lb-btn{font-family:'Bebas Neue';font-size:1.2rem;padding:7px 20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#fff;cursor:pointer;border-radius:3px;transition:all .2s;}
+.lb-btn:hover{background:rgba(0,245,255,.1);border-color:var(--cyan);color:var(--cyan);}
+
+/* ===== TRAILERS ===== */
+.trailers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:30px;}
+.trailer-wrap{border-radius:6px;overflow:hidden;border:1px solid var(--border);background:#000;aspect-ratio:16/9;position:relative;cursor:pointer;}
+.trailer-thumb-img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .3s;}
+.trailer-wrap:hover .trailer-thumb-img{filter:brightness(1.1);}
+.trailer-play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.38);transition:background .2s;}
+.trailer-play-btn:hover{background:rgba(0,0,0,.15);}
+.play-circle{width:64px;height:64px;background:rgba(255,0,110,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 0 30px rgba(255,0,110,.55);transition:transform .22s,box-shadow .22s;}
+.trailer-play-btn:hover .play-circle{transform:scale(1.12);box-shadow:0 0 45px rgba(255,0,110,.7);}
+.trailer-iframe-el{width:100%;height:100%;border:none;display:none;position:absolute;inset:0;}
+.trailer-lbl{font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:.18em;text-align:center;padding:10px;color:var(--dim);background:var(--card);text-transform:uppercase;border-top:1px solid var(--border);}
+
+/* ===== TRAILERS (novo) ===== */
+.trailers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:32px;}
+.trailer-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .22s,box-shadow .22s;display:flex;flex-direction:column;}
+[data-theme="light"] .trailer-card{background:#fff;border-color:rgba(0,0,0,.08);box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.trailer-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.6);}
+.trailer-thumb-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;}
+.trailer-thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .3s;}
+.trailer-card:hover .trailer-thumb-wrap img{filter:brightness(1.1) saturate(1.1);}
+.trailer-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);transition:background .2s;}
+.trailer-card:hover .trailer-overlay{background:rgba(0,0,0,.15);}
+.play-circle{width:64px;height:64px;background:rgba(255,0,110,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 0 32px rgba(255,0,110,.55);transition:transform .22s,box-shadow .22s;}
+.trailer-card:hover .play-circle{transform:scale(1.12);box-shadow:0 0 48px rgba(255,0,110,.7);}
+.trailer-badge{position:absolute;top:10px;left:10px;font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:.16em;padding:4px 10px;background:rgba(255,0,110,.85);color:#fff;border-radius:3px;text-transform:uppercase;}
+.trailer-info{padding:14px 16px;}
+.trailer-title{font-family:'Bebas Neue';font-size:1.2rem;letter-spacing:.07em;margin-bottom:3px;}
+.trailer-meta{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;}
+
+/* ===== TIMELINE (novo) ===== */
+.tl-wrap{position:relative;margin-top:44px;padding-left:36px;}
+.tl-line{position:absolute;left:12px;top:8px;bottom:8px;width:3px;
+  background:linear-gradient(to bottom,var(--cyan) 0%,var(--pink) 40%,var(--orange) 70%,var(--green) 100%);
+  border-radius:3px;}
+.tl-item{position:relative;margin-bottom:36px;opacity:0;transform:translateX(-22px);
+  transition:opacity .55s ease,transform .55s ease;}
+.tl-item.tl-vis{opacity:1;transform:translateX(0);}
+.tl-dot{position:absolute;left:-30px;top:6px;width:16px;height:16px;border-radius:50%;
+  border:3px solid;background:var(--bg);box-shadow:0 0 12px currentColor;z-index:2;}
+[data-theme="light"] .tl-dot{background:#f2f0fc;}
+.tl-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:16px 20px;
+  transition:border-color .2s,box-shadow .2s;}
+.tl-card:hover{border-color:rgba(0,245,255,.18);box-shadow:0 8px 28px rgba(0,0,0,.3);}
+[data-theme="light"] .tl-card{background:#fff;border-color:rgba(0,0,0,.07);box-shadow:0 2px 12px rgba(0,0,0,.05);}
+.tl-date{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.22em;color:var(--dim);margin-bottom:5px;text-transform:uppercase;}
+.tl-title{font-family:'Bebas Neue';font-size:1.3rem;letter-spacing:.07em;margin-bottom:5px;line-height:1.1;}
+.tl-desc{font-size:.84rem;color:var(--dim);line-height:1.65;}
+.tl-badge{font-family:'Share Tech Mono';font-size:.54rem;letter-spacing:.1em;padding:3px 8px;
+  border-radius:2px;display:inline-block;margin-top:7px;border:1px solid;}
+
+/* ===== "SEU PC AGUENTA" TEASER ===== */
+.teaser-box{background:linear-gradient(135deg,#0a001e,#18003c);border:1px solid rgba(0,245,255,.16);
+  border-radius:6px;padding:38px 32px;display:flex;align-items:center;
+  justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:48px;margin-bottom:72px;}
+[data-theme="light"] .teaser-box{background:linear-gradient(135deg,#eae5ff,#f5f0ff);border-color:rgba(100,0,200,.18);}
+.teaser-left{flex:1;min-width:220px;}
+.teaser-icon{font-size:3.2rem;margin-bottom:12px;display:block;}
+.teaser-title{font-family:'Bebas Neue';font-size:clamp(1.8rem,4vw,3rem);letter-spacing:.06em;line-height:1;margin-bottom:8px;}
+.teaser-title span{color:var(--cyan);}
+.teaser-desc{font-size:.9rem;color:var(--dim);line-height:1.65;max-width:480px;}
+.teaser-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.teaser-btn{font-family:'Bebas Neue';font-size:1rem;letter-spacing:.14em;padding:11px 24px;
+  border-radius:4px;cursor:pointer;border:none;transition:all .22s;text-decoration:none;display:inline-block;}
+.tb-primary{background:linear-gradient(135deg,var(--cyan),#00c8d0);color:#07010f;
+  box-shadow:0 0 24px rgba(0,245,255,.3);}
+.tb-primary:hover{box-shadow:0 0 38px rgba(0,245,255,.5);transform:translateY(-2px);}
+.tb-secondary{background:none;color:var(--pink);border:1px solid var(--pink);}
+.tb-secondary:hover{background:rgba(255,0,110,.09);transform:translateY(-2px);}
+.teaser-right{flex-shrink:0;}
+.teaser-fps-preview{text-align:center;}
+.teaser-fps-num{font-family:'Bebas Neue';font-size:4rem;line-height:1;color:var(--cyan);
+  text-shadow:0 0 30px rgba(0,245,255,.5);}
+.teaser-fps-lbl{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.22em;color:var(--dim);margin-top:2px;}
+.teaser-tiers{display:flex;gap:6px;margin-top:10px;justify-content:center;}
+.tts{font-family:'Share Tech Mono';font-size:.52rem;letter-spacing:.06em;padding:3px 8px;
+  border-radius:2px;border:1px solid;}
+
+/* ===== QUIZ (rebuilt) ===== */
+.quiz-section{padding:72px 24px;max-width:860px;margin:0 auto;}
+.quiz-box{background:linear-gradient(135deg,#0d0025,#1a003a);border:1px solid rgba(255,0,110,.2);
+  border-radius:6px;padding:36px 32px;margin-top:24px;}
+[data-theme="light"] .quiz-box{background:linear-gradient(135deg,#f2eaff,#fcf8ff);border-color:rgba(180,0,90,.15);}
+.quiz-step{display:none;animation:fadeSlide .35s ease;}
+.quiz-step.active{display:block;}
+@keyframes fadeSlide{from{opacity:0;transform:translateX(14px);}to{opacity:1;transform:translateX(0);}}
+.quiz-prog{display:flex;gap:6px;margin-bottom:22px;}
+.qp-pip{height:4px;flex:1;border-radius:3px;background:rgba(255,255,255,.1);transition:background .35s;}
+.qp-pip.done{background:var(--pink);}
+.qp-pip.now{background:var(--cyan);}
+.quiz-num{font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.2em;color:var(--dim);margin-bottom:8px;}
+.quiz-q{font-family:'Bebas Neue';font-size:clamp(1.3rem,3vw,1.8rem);letter-spacing:.05em;line-height:1.15;margin-bottom:22px;}
+.quiz-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+.quiz-opt{padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);
+  border-radius:4px;cursor:pointer;font-size:.9rem;font-weight:600;line-height:1.4;
+  transition:all .22s;text-align:left;color:var(--txt);}
+[data-theme="light"] .quiz-opt{background:#fff;border-color:rgba(0,0,0,.09);}
+.quiz-opt:hover{border-color:var(--pink);background:rgba(255,0,110,.07);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2);}
+.quiz-result-wrap{text-align:center;padding:10px 0;}
+.qr-emoji{font-size:3.5rem;margin-bottom:14px;display:block;}
+.qr-title{font-family:'Bebas Neue';font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.1em;margin-bottom:10px;}
+.qr-desc{font-size:.92rem;color:var(--dim);max-width:480px;margin:0 auto;line-height:1.72;}
+.quiz-restart-btn{margin-top:20px;font-family:'Bebas Neue';font-size:1rem;letter-spacing:.16em;
+  padding:10px 26px;background:none;border:1px solid var(--pink);color:var(--pink);
+  border-radius:4px;cursor:pointer;transition:all .2s;}
+.quiz-restart-btn:hover{background:rgba(255,0,110,.1);}
+
+/* ===== VOTING (rebuilt) ===== */
+.vote-section{padding:72px 24px;max-width:860px;margin:0 auto;}
+.vote-box{background:linear-gradient(135deg,#0a001e,#140030);border:1px solid rgba(114,137,218,.22);
+  border-radius:6px;padding:32px 28px;margin-top:24px;}
+[data-theme="light"] .vote-box{background:linear-gradient(135deg,#ece8ff,#f5f2ff);border-color:rgba(100,0,200,.14);}
+.vote-item{display:grid;grid-template-columns:160px 1fr 46px;align-items:center;gap:12px;margin-bottom:12px;}
+@media(max-width:500px){.vote-item{grid-template-columns:1fr;gap:6px;}}
+.vote-btn{font-family:'Share Tech Mono';font-size:.59rem;letter-spacing:.1em;padding:8px 14px;
+  border-radius:3px;border:1px solid rgba(255,255,255,.13);background:none;color:var(--txt);
+  cursor:pointer;transition:all .22s;text-align:left;width:100%;}
+.vote-btn:hover:not(:disabled){border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,255,.05);}
+.vote-btn:disabled{opacity:.5;cursor:default;}
+[data-theme="light"] .vote-btn{border-color:rgba(0,0,0,.1);color:#3a2060;}
+.vbar-track{height:8px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;}
+[data-theme="light"] .vbar-track{background:rgba(0,0,0,.07);}
+.vbar-fill{height:100%;border-radius:4px;transition:width .65s ease;width:0%;}
+.vpct{font-family:'Bebas Neue';font-size:1.05rem;text-align:right;}
+.vote-total-lbl{font-family:'Share Tech Mono';font-size:.58rem;letter-spacing:.18em;
+  color:var(--dim);margin-top:16px;text-align:right;}
+
+/* ===== ALERT (rebuilt) ===== */
+.alert-section{padding:0 24px 72px;max-width:860px;margin:0 auto;}
+.alert-box{background:linear-gradient(135deg,#00180e,#002618);border:1px solid rgba(57,255,20,.18);
+  border-radius:6px;padding:30px 28px;display:flex;align-items:flex-start;
+  justify-content:space-between;gap:20px;flex-wrap:wrap;}
+[data-theme="light"] .alert-box{background:linear-gradient(135deg,#eaffee,#f5fff8);border-color:rgba(0,160,70,.15);}
+.alert-icon-big{font-size:2.5rem;flex-shrink:0;}
+.alert-content{flex:1;}
+.alert-title{font-family:'Bebas Neue';font-size:1.6rem;letter-spacing:.1em;color:var(--green);margin-bottom:5px;}
+.alert-desc{font-size:.85rem;color:var(--dim);line-height:1.65;}
+.alert-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
+.al-link{font-family:'Share Tech Mono';font-size:.59rem;letter-spacing:.1em;
+  padding:9px 16px;border-radius:3px;border:1px solid;transition:all .2s;white-space:nowrap;}
+.al-dc{color:#7289da;border-color:rgba(114,137,218,.38);background:rgba(114,137,218,.07);}
+.al-dc:hover{background:rgba(114,137,218,.15);}
+.al-yt{color:#ff4040;border-color:rgba(255,64,64,.32);background:rgba(255,64,64,.07);}
+.al-yt:hover{background:rgba(255,64,64,.15);}
+
+/* ===== EDITIONS (rebuilt) ===== */
+.edition-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:30px;}
+.edition-card{border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.08);
+  display:flex;flex-direction:column;}
+[data-theme="light"] .edition-card{background:#fff;border-color:rgba(0,0,0,.08);box-shadow:0 2px 14px rgba(0,0,0,.05);}
+.ed-head{padding:22px 22px 18px;}
+.ed-label{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.28em;opacity:.55;margin-bottom:6px;text-transform:uppercase;}
+.ed-name{font-family:'Bebas Neue';font-size:2.2rem;letter-spacing:.07em;line-height:1;}
+.ed-price{font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:.04em;margin-top:4px;opacity:.9;}
+.ed-body{padding:0 22px 22px;flex:1;display:flex;flex-direction:column;gap:8px;}
+.ed-item{font-size:.85rem;display:flex;align-items:flex-start;gap:9px;line-height:1.45;}
+.ed-item b{flex-shrink:0;font-size:.95rem;}
+.ed-note{margin-top:10px;padding:11px 14px;border-radius:4px;font-size:.78rem;line-height:1.6;}
+.ed-bonus-title{font-family:'Bebas Neue';font-size:.95rem;letter-spacing:.15em;margin-bottom:8px;}
+.ed-std .ed-head{background:linear-gradient(135deg,#160030,#22004a);}
+.ed-std .ed-name{color:#fff;}.ed-std .ed-price{color:var(--pink);}
+.ed-std .ed-note{background:rgba(255,0,110,.05);border:1px solid rgba(255,0,110,.14);}
+.ed-ult .ed-head{background:linear-gradient(135deg,#001830,#003050);}
+.ed-ult .ed-name{color:var(--cyan);text-shadow:0 0 16px rgba(0,245,255,.4);}
+.ed-ult .ed-price{color:var(--cyan);}
+.ed-ult .ed-note{background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.14);}
+.ed-ult{border-color:rgba(0,245,255,.22);box-shadow:0 0 28px rgba(0,245,255,.05);}
+.preorder-banner{background:linear-gradient(135deg,rgba(255,140,0,.12),rgba(255,0,110,.08));
+  border:1px solid rgba(255,140,0,.3);border-radius:6px;padding:18px 22px;
+  display:flex;align-items:flex-start;gap:14px;margin-top:22px;}
+.pb-icon{font-size:1.8rem;flex-shrink:0;}
+.pb-title{font-family:'Bebas Neue';font-size:1.15rem;letter-spacing:.12em;color:var(--orange);margin-bottom:5px;}
+.pb-desc{font-size:.82rem;color:var(--dim);line-height:1.65;}
+.preload-note{background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.15);
+  border-radius:4px;padding:12px 16px;margin-top:14px;font-size:.82rem;color:var(--dim);line-height:1.6;}
+.preload-note b{color:var(--cyan);}
+
+/* ===== CONSOLES (novo layout) ===== */
+.con-layout{display:grid;grid-template-columns:180px 1fr;gap:0;background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;margin-top:28px;min-height:400px;}
+[data-theme="light"] .con-layout{background:#fff;border-color:rgba(0,0,0,.08);box-shadow:0 2px 16px rgba(0,0,0,.06);}
+@media(max-width:700px){.con-layout{grid-template-columns:1fr;}}
+.con-sidebar{display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.06);}
+[data-theme="light"] .con-sidebar{border-right-color:rgba(0,0,0,.07);}
+.con-stab{padding:16px 18px;cursor:pointer;display:flex;flex-direction:column;gap:3px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .18s;user-select:none;position:relative;}
+[data-theme="light"] .con-stab{border-bottom-color:rgba(0,0,0,.05);}
+.con-stab:last-child{border-bottom:none;}
+.con-stab::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:transparent;transition:background .18s;}
+.con-stab.active{background:rgba(255,255,255,.04);}
+[data-theme="light"] .con-stab.active{background:rgba(0,0,0,.03);}
+.con-stab:hover:not(.active){background:rgba(255,255,255,.02);}
+.con-stab-plat{font-family:'Share Tech Mono';font-size:.5rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;}
+.con-stab-name{font-family:'Bebas Neue';font-size:1.2rem;letter-spacing:.07em;line-height:1;}
+.con-stab-fps{font-family:'Share Tech Mono';font-size:.5rem;letter-spacing:.06em;color:var(--dim);}
+.con-main-panel{display:none;flex-direction:column;overflow:auto;}
+.con-main-panel.active{display:flex;}
+.con-main-img{width:100%;height:160px;object-fit:cover;object-position:center 30%;display:block;filter:brightness(.65) saturate(1.3);flex-shrink:0;}
+.con-main-body{padding:20px 24px;flex:1;display:flex;flex-direction:column;}
+.con-main-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
+.con-main-name{font-family:'Bebas Neue';font-size:2rem;letter-spacing:.06em;line-height:1;}
+.con-main-tag{font-family:'Share Tech Mono';font-size:.54rem;letter-spacing:.1em;padding:4px 10px;border-radius:2px;border:1px solid;white-space:nowrap;margin-top:4px;}
+.con-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+@media(max-width:900px){.con-spec-grid{grid-template-columns:1fr;}}
+.con-sr{display:flex;justify-content:space-between;align-items:flex-start;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);gap:10px;}
+[data-theme="light"] .con-sr{border-bottom-color:rgba(0,0,0,.05);}
+.con-sr:last-child{border-bottom:none;}
+.cnsl{font-family:'Share Tech Mono';font-size:.52rem;letter-spacing:.1em;color:var(--dim);white-space:nowrap;}
+.cnsv{font-size:.82rem;font-weight:600;text-align:right;}
+.cnsv small{display:block;font-size:.67rem;font-weight:400;color:var(--dim);}
+.con-pills-new{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.con-pill-new{font-family:'Share Tech Mono';font-size:.54rem;letter-spacing:.06em;padding:3px 9px;border-radius:2px;border:1px solid;}
+.con-verdict-new{margin-top:12px;padding:11px 14px;border-radius:4px;font-size:.8rem;line-height:1.6;flex:1;}
+.con-verdict-new b{display:block;font-family:'Bebas Neue';font-size:.88rem;letter-spacing:.12em;margin-bottom:3px;}
+
+/* ===== CONSOLES (legado) ===== */
+.con-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px;margin-bottom:24px;}
+.con-tab{font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:.14em;padding:8px 18px;
+  border-radius:3px;border:1px solid rgba(255,255,255,.12);background:none;
+  color:var(--dim);cursor:pointer;transition:all .22s;text-transform:uppercase;}
+.con-tab.active{background:rgba(0,245,255,.1);border-color:var(--cyan);color:var(--cyan);}
+[data-theme="light"] .con-tab{border-color:rgba(0,0,0,.1);color:#6b5f80;}
+[data-theme="light"] .con-tab.active{border-color:#5500aa;color:#5500aa;background:rgba(100,0,200,.07);}
+.con-panel{display:none;animation:fadeSlide .3s ease;}
+.con-panel.active{display:block;}
+.con-detail{background:var(--card);border-radius:6px;border:1px solid rgba(255,255,255,.07);
+  overflow:hidden;display:flex;flex-direction:column;}
+[data-theme="light"] .con-detail{background:#fff;border-color:rgba(0,0,0,.07);box-shadow:0 2px 16px rgba(0,0,0,.06);}
+.con-detail-img{height:160px;object-fit:cover;object-position:center 30%;display:block;filter:brightness(.65) saturate(1.3);width:100%;}
+.con-detail-body{padding:20px 24px;}
+.con-detail-platform{font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:5px;}
+.con-detail-name{font-family:'Bebas Neue';font-size:2.4rem;letter-spacing:.07em;line-height:1;margin-bottom:4px;}
+.con-detail-tag{font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:.12em;
+  padding:3px 9px;border-radius:2px;border:1px solid;display:inline-block;margin-bottom:16px;}
+.con-spec-row{display:flex;justify-content:space-between;align-items:flex-start;
+  padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);gap:12px;}
+[data-theme="light"] .con-spec-row{border-bottom-color:rgba(0,0,0,.05);}
+.con-spec-row:last-child{border-bottom:none;}
+.csl{font-family:'Share Tech Mono';font-size:.56rem;letter-spacing:.14em;color:var(--dim);white-space:nowrap;padding-top:2px;}
+.csv{font-size:.85rem;font-weight:700;text-align:right;}
+.csv small{display:block;font-size:.72rem;font-weight:400;color:var(--dim);margin-top:1px;}
+.con-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
+.con-pill{font-family:'Share Tech Mono';font-size:.56rem;letter-spacing:.07em;
+  padding:3px 9px;border-radius:2px;border:1px solid;}
+.con-verdict{margin-top:14px;padding:11px 14px;border-radius:4px;font-size:.8rem;line-height:1.6;}
+.con-verdict-t{font-family:'Bebas Neue';font-size:.88rem;letter-spacing:.14em;margin-bottom:3px;}
+
+/* ── TRAILER CARDS (novo) ── */
+.trailers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:32px;}
+.trailer-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .22s,box-shadow .22s;}
+[data-theme="light"] .trailer-card{background:#fff;border-color:rgba(0,0,0,.09);}
+.trailer-card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,0,0,.65);}
+.trailer-thumb-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;}
+.trailer-thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s;}
+.trailer-card:hover .trailer-thumb-wrap img{transform:scale(1.04);}
+.trailer-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.38);transition:background .2s;}
+.trailer-card:hover .trailer-overlay{background:rgba(0,0,0,.15);}
+.play-circle{width:66px;height:66px;background:rgba(255,0,110,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 0 34px rgba(255,0,110,.6);transition:transform .22s,box-shadow .22s;}
+.trailer-card:hover .play-circle{transform:scale(1.12);box-shadow:0 0 52px rgba(255,0,110,.75);}
+.trailer-badge{position:absolute;top:10px;left:10px;font-family:"Share Tech Mono";font-size:.53rem;letter-spacing:.16em;padding:4px 10px;background:rgba(255,0,110,.85);color:#fff;border-radius:3px;}
+.trailer-info{padding:14px 16px 16px;}
+.trailer-title{font-family:"Bebas Neue";font-size:1.2rem;letter-spacing:.07em;margin-bottom:3px;}
+.trailer-meta{font-family:"Share Tech Mono";font-size:.56rem;letter-spacing:.14em;color:var(--dim);}
+
+/* ── VIDEO MODAL ── */
+#video-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.93);
+  display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:20px;}
+#video-modal.open{display:flex;}
+.vm-close{position:absolute;top:18px;right:22px;font-family:"Bebas Neue";font-size:2.2rem;
+  color:#fff;background:none;border:none;cursor:pointer;opacity:.55;transition:opacity .2s;line-height:1;}
+.vm-close:hover{opacity:1;}
+.vm-title{font-family:"Share Tech Mono";font-size:.6rem;letter-spacing:.2em;
+  color:rgba(255,255,255,.4);text-align:center;text-transform:uppercase;}
+.vm-frame-wrap{width:100%;max-width:880px;aspect-ratio:16/9;position:relative;
+  border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.1);}
+.vm-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;background:#000;}
+.vm-ytlink{font-family:"Share Tech Mono";font-size:.59rem;letter-spacing:.13em;
+  padding:8px 18px;border:1px solid rgba(255,64,64,.4);color:#ff4040;
+  border-radius:3px;background:rgba(255,64,64,.08);transition:all .2s;}
+.vm-ytlink:hover{background:rgba(255,64,64,.16);}
+
+/* ── PC LAYOUT SIDE-BY-SIDE ── */
+.pc-layout{display:grid;grid-template-columns:200px 1fr;background:var(--card);
+  border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;margin-top:28px;min-height:420px;}
+[data-theme="light"] .pc-layout{background:#fff;border-color:rgba(0,0,0,.09);box-shadow:0 2px 18px rgba(0,0,0,.07);}
+@media(max-width:680px){.pc-layout{grid-template-columns:1fr;}}
+.pc-sidebar{border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;}
+[data-theme="light"] .pc-sidebar{border-right-color:rgba(0,0,0,.07);}
+.pc-tab{padding:16px 16px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05);
+  transition:background .18s;user-select:none;position:relative;display:flex;flex-direction:column;gap:3px;}
+[data-theme="light"] .pc-tab{border-bottom-color:rgba(0,0,0,.05);}
+.pc-tab:last-child{border-bottom:none;}
+.pc-tab::after{content:"";position:absolute;right:0;top:0;bottom:0;width:3px;background:transparent;transition:background .2s;}
+.pc-tab.active{background:rgba(255,255,255,.04);}
+.pc-tab.active::after{background:var(--tc,var(--cyan));}
+[data-theme="light"] .pc-tab.active{background:rgba(0,0,0,.03);}
+.pc-tab:hover:not(.active){background:rgba(255,255,255,.025);}
+.pc-tab-badge{font-family:"Share Tech Mono";font-size:.52rem;letter-spacing:.12em;
+  padding:2px 7px;border-radius:2px;border:1px solid;display:inline-block;width:fit-content;}
+.pc-tab-name{font-family:"Bebas Neue";font-size:1.05rem;letter-spacing:.06em;line-height:1;margin-top:4px;}
+.pc-tab-fps{font-family:"Share Tech Mono";font-size:.5rem;letter-spacing:.06em;color:var(--dim);}
+.pc-panels{overflow:auto;}
+.pc-panel{display:none;}
+.pc-panel.active{display:flex;flex-direction:column;height:100%;}
+.pc-panel-img{width:100%;height:150px;object-fit:cover;filter:brightness(.58) saturate(1.3);display:block;flex-shrink:0;}
+.pc-panel-body{padding:18px 20px;flex:1;display:flex;flex-direction:column;}
+.pc-spec-row{display:flex;justify-content:space-between;align-items:center;
+  padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);gap:10px;}
+[data-theme="light"] .pc-spec-row{border-bottom-color:rgba(0,0,0,.05);}
+.pc-spec-row:last-of-type{border-bottom:none;}
+.pcsl{font-family:"Share Tech Mono";font-size:.52rem;letter-spacing:.09em;color:var(--dim);white-space:nowrap;min-width:52px;}
+.pcsv{font-size:.8rem;font-weight:600;text-align:right;line-height:1.2;}
+.pcsv small{display:block;font-size:.66rem;font-weight:400;color:var(--dim);}
+.pc-perf{margin-top:8px;padding:9px 12px;border-radius:4px;}
+.pc-perf-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;}
+.pc-pl{font-size:.72rem;color:var(--dim);}
+.pc-pv{font-family:"Bebas Neue";font-size:1.05rem;letter-spacing:.04em;}
+.pc-bar-track{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;margin-top:4px;}
+.pc-bar-fill{height:100%;border-radius:2px;}
+.pc-price-row{display:flex;align-items:baseline;gap:12px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);}
+[data-theme="light"] .pc-price-row{border-top-color:rgba(0,0,0,.06);}
+.pc-price-lbl{font-family:"Share Tech Mono";font-size:.52rem;letter-spacing:.16em;color:var(--dim);}
+.pc-price-val{font-family:"Bebas Neue";font-size:1.45rem;letter-spacing:.04em;}
+.pc-price-note{font-size:.7rem;color:var(--dim);margin-top:3px;line-height:1.4;}
+.pc-wtag{display:inline-block;font-family:"Share Tech Mono";font-size:.52rem;
+  letter-spacing:.06em;padding:3px 7px;border-radius:2px;margin-top:5px;border:1px solid;}
+
+/* ── CONSOLE LAYOUT SIDE-BY-SIDE ── */
+.con-layout{display:grid;grid-template-columns:168px 1fr;background:var(--card);
+  border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;margin-top:28px;min-height:380px;}
+[data-theme="light"] .con-layout{background:#fff;border-color:rgba(0,0,0,.09);box-shadow:0 2px 18px rgba(0,0,0,.07);}
+@media(max-width:680px){.con-layout{grid-template-columns:1fr;}}
+.con-sidebar{border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;}
+[data-theme="light"] .con-sidebar{border-right-color:rgba(0,0,0,.07);}
+.con-stab{padding:14px 16px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05);
+  transition:background .18s;user-select:none;position:relative;display:flex;flex-direction:column;gap:2px;}
+[data-theme="light"] .con-stab{border-bottom-color:rgba(0,0,0,.05);}
+.con-stab:last-child{border-bottom:none;}
+.con-stab::after{content:"";position:absolute;right:0;top:0;bottom:0;width:3px;background:transparent;transition:background .2s;}
+.con-stab.active{background:rgba(255,255,255,.04);}
+.con-stab.active::after{background:var(--tc,var(--cyan));}
+[data-theme="light"] .con-stab.active{background:rgba(0,0,0,.03);}
+.con-stab:hover:not(.active){background:rgba(255,255,255,.025);}
+.con-stab-plat{font-family:"Share Tech Mono";font-size:.49rem;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;}
+.con-stab-name{font-family:"Bebas Neue";font-size:1.1rem;letter-spacing:.06em;line-height:1;margin-top:3px;}
+.con-stab-fps{font-family:"Share Tech Mono";font-size:.49rem;letter-spacing:.05em;color:var(--dim);}
+.con-panels{overflow:auto;}
+.con-panel-new{display:none;}
+.con-panel-new.active{display:flex;flex-direction:column;height:100%;}
+.con-panel-img{width:100%;height:150px;object-fit:cover;object-position:center 30%;
+  filter:brightness(.62) saturate(1.2);display:block;flex-shrink:0;}
+.con-panel-body{padding:18px 22px;flex:1;display:flex;flex-direction:column;}
+.con-panel-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;}
+.con-panel-name{font-family:"Bebas Neue";font-size:1.9rem;letter-spacing:.06em;line-height:1;}
+.con-panel-tag{font-family:"Share Tech Mono";font-size:.52rem;letter-spacing:.09em;
+  padding:4px 9px;border-radius:2px;border:1px solid;white-space:nowrap;align-self:flex-start;}
+.con-spec-row{display:flex;justify-content:space-between;align-items:flex-start;
+  padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);gap:10px;}
+[data-theme="light"] .con-spec-row{border-bottom-color:rgba(0,0,0,.05);}
+.con-spec-row:last-of-type{border-bottom:none;}
+.cnsl{font-family:"Share Tech Mono";font-size:.52rem;letter-spacing:.09em;color:var(--dim);white-space:nowrap;}
+.cnsv{font-size:.82rem;font-weight:600;text-align:right;}
+.cnsv small{display:block;font-size:.67rem;font-weight:400;color:var(--dim);}
+.con-pills-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px;}
+.con-pill-new{font-family:"Share Tech Mono";font-size:.52rem;letter-spacing:.06em;padding:3px 8px;border-radius:2px;border:1px solid;}
+.con-verdict-box{margin-top:10px;padding:10px 13px;border-radius:4px;font-size:.8rem;line-height:1.6;flex:1;}
+.con-verdict-box strong{display:block;font-family:"Bebas Neue";font-size:.85rem;letter-spacing:.12em;margin-bottom:2px;}
+
+/* ── PLAYLIST SECTION ── */
+.playlist-section{padding:72px 24px;background:linear-gradient(135deg,#06000f,#110022);
+  border-top:1px solid rgba(255,0,110,.1);border-bottom:1px solid rgba(0,245,255,.08);}
+.playlist-inner{max-width:900px;margin:0 auto;}
+.playlist-player{margin-top:32px;border-radius:8px;overflow:hidden;
+  border:1px solid rgba(255,0,110,.2);box-shadow:0 0 48px rgba(0,0,0,.7);
+  aspect-ratio:16/9;position:relative;background:#000;}
+.playlist-player iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.playlist-links{display:flex;justify-content:center;gap:10px;margin-top:18px;flex-wrap:wrap;}
+.pl-link{font-family:"Share Tech Mono";font-size:.59rem;letter-spacing:.13em;
+  padding:9px 20px;border-radius:3px;border:1px solid;transition:all .2s;display:inline-flex;align-items:center;gap:7px;}
+.pl-link-yt{color:#ff4040;border-color:rgba(255,64,64,.35);background:rgba(255,64,64,.07);}
+.pl-link-yt:hover{background:rgba(255,64,64,.16);}
+.pl-link-sub{color:var(--green);border-color:rgba(57,255,20,.3);background:rgba(57,255,20,.06);}
+.pl-link-sub:hover{background:rgba(57,255,20,.14);}
+
+/* ── GPU ACCORDION ── */
+.gpu-accordion{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:6px;overflow:hidden;margin-top:20px;}
+[data-theme="light"] .gpu-accordion{background:#fff;border-color:rgba(0,0,0,.08);}
+.gpu-acc-head{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .18s;gap:12px;}
+.gpu-acc-head:hover{background:rgba(0,245,255,.04);}
+.gpu-acc-title{font-family:"Bebas Neue";font-size:1.1rem;letter-spacing:.08em;color:var(--cyan);}
+.gpu-acc-sub{font-family:"Share Tech Mono";font-size:.53rem;letter-spacing:.09em;color:var(--dim);margin-top:2px;}
+.gpu-acc-chev{font-size:1rem;color:var(--dim);transition:transform .35s;flex-shrink:0;}
+.gpu-accordion.open .gpu-acc-chev{transform:rotate(180deg);}
+.gpu-acc-body{max-height:0;overflow:hidden;transition:max-height .5s ease;}
+.gpu-accordion.open .gpu-acc-body{max-height:1200px;}
+.gpu-wrap{overflow-x:auto;padding:4px 4px 14px;}
+
+/* ══════════════════════════════════════════
+   PROFESSIONAL POLISH — v6 FINAL
+══════════════════════════════════════════ */
+
+/* Smooth scrolling + selection color */
+::selection { background: rgba(0,245,255,.25); color: #fff; }
+html { scroll-behavior: smooth; }
+
+/* Consistent section spacing */
+.section-gap { padding: 80px 0; }
+
+/* ── NAV improvements ── */
+nav {
+  padding: 0 36px;
+  height: 58px;
+  gap: 20px;
+}
+.nav-logo {
+  font-family: 'Bebas Neue';
+  font-size: 1.4rem;
+  letter-spacing: .25em;
+  color: var(--cyan);
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Share Tech Mono';
+  font-size: .55rem;
+  letter-spacing: .2em;
+  color: var(--dim);
+  text-transform: uppercase;
+  transition: color .2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--cyan); }
+@media(max-width:900px) { .nav-links { display: none; } }
+
+/* ── HERO image sizing ── */
+.hero-content { max-width: 820px; }
+.hero-gta {
+  font-size: clamp(4.5rem, 16vw, 11rem);
+  line-height: .85;
+}
+
+/* ── BANNER images — controlled height ── */
+.banner-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: center 40%;
+  border-radius: 6px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+  filter: brightness(.55) saturate(1.3);
+  display: block;
+}
+
+/* ── SECTION label / title consistency ── */
+.sec-label {
+  font-family: 'Share Tech Mono';
+  font-size: .6rem;
+  letter-spacing: .45em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+.sec-title {
+  font-family: 'Bebas Neue';
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: .05em;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.sec-desc {
+  font-size: .9rem;
+  color: var(--dim);
+  line-height: 1.7;
+  max-width: 560px;
+}
+.sec-head { margin-bottom: 36px; }
+
+/* ── WRAP containers ── */
+.wrap { padding: 72px 32px; max-width: 1360px; margin: 0 auto; }
+.wrap-sm { padding: 72px 32px; max-width: 940px; margin: 0 auto; }
+
+/* ── DIVIDER glows ── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,245,255,.18) 30%, rgba(255,0,110,.18) 70%, transparent 100%);
+}
+
+/* ── FADE animation ── */
+.fade { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+.fade.visible { opacity: 1; transform: translateY(0); }
+
+/* ── TEASER box ── */
+.teaser-box {
+  background: linear-gradient(135deg, rgba(0,245,255,.04), rgba(255,0,110,.04));
+  border: 1px solid rgba(0,245,255,.14);
+  border-radius: 8px;
+  padding: 36px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin: 48px 0 0;
+}
+[data-theme="light"] .teaser-box { background: linear-gradient(135deg,#eae5ff,#fff0f7); border-color: rgba(100,0,200,.15); }
+
+/* ── COUNTDOWN ── */
+.cd-box {
+  font-family: 'Bebas Neue';
+  font-size: clamp(2.4rem,8vw,4.5rem);
+  line-height: 1;
+  min-width: 90px;
+  padding: 10px 16px;
+  text-align: center;
+  background: rgba(0,0,0,.4);
+  border: 1px solid rgba(0,245,255,.2);
+  border-radius: 4px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(0,245,255,.5);
+}
+
+/* ── RAGE ENGINE grid items ── */
+.rage-item {
+  padding: 14px 16px;
+  border-left: 3px solid var(--cyan);
+  background: rgba(0,245,255,.025);
+  border-radius: 0 4px 4px 0;
+  transition: background .2s, border-color .2s;
+}
+.rage-item:hover { background: rgba(0,245,255,.05); }
+
+/* ── PC LAYOUT — image height ── */
+.pc-panel-img {
+  height: 140px;
+  object-fit: cover;
+  filter: brightness(.55) saturate(1.3);
+}
+
+/* ── CONSOLE LAYOUT — image height ── */
+.con-panel-img {
+  height: 140px;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: brightness(.6) saturate(1.2);
+}
+
+/* ── TRAILER cards — image height control ── */
+.trailer-thumb-wrap {
+  aspect-ratio: 16/9;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+/* ── EDITIONS cards ── */
+.ed-head { padding: 20px 22px 16px; }
+.ed-body { padding: 0 22px 20px; }
+
+/* ── RUMORES grid ── */
+.rumor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+  margin-top: 32px;
+}
+.rumor-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,.022);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 6px;
+  transition: background .2s, border-color .2s;
+}
+.rumor-item:hover { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.1); }
+[data-theme="light"] .rumor-item { background: #fff; border-color: rgba(0,0,0,.07); }
+
+/* ── FAQ ── */
+.faq-item { transition: box-shadow .2s; }
+.faq-item.open { box-shadow: 0 4px 20px rgba(0,0,0,.3); }
+.faq-q { transition: background .15s; }
+
+/* ── QUIZ opts hover ── */
+.quiz-opt:active { transform: scale(.98); }
+
+/* ── VOTE bars ── */
+.vbar-fill { transition: width .7s cubic-bezier(.4,0,.2,1); }
+
+/* ── CANAL card hover ── */
+.canal-card {
+  transition: transform .22s, box-shadow .22s, border-color .22s;
+}
+.canal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(0,0,0,.5);
+  border-color: rgba(255,0,110,.25);
+}
+
+/* ── HERO disclaimer text ── */
+.hero-disclaimer {
+  margin-top: 16px;
+  font-family: 'Share Tech Mono';
+  font-size: .55rem;
+  letter-spacing: .09em;
+  color: var(--dim);
+  opacity: .5;
+  max-width: 500px;
+  margin-inline: auto;
+  line-height: 1.8;
+}
+
+/* ── HERO badges ── */
+.hero-badges {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hbadge {
+  font-family: 'Share Tech Mono';
+  font-size: .58rem;
+  letter-spacing: .16em;
+  padding: 7px 16px;
+  border-radius: 3px;
+  border: 1px solid;
+  transition: all .2s;
+}
+.hbadge:hover { transform: translateY(-2px); }
+.hb-yt  { color:#ff4040; border-color:rgba(255,64,64,.4); background:rgba(255,64,64,.08); }
+.hb-tt  { color:#00f2ea; border-color:rgba(0,242,234,.35);background:rgba(0,242,234,.07); }
+.hb-dc  { color:#7289da; border-color:rgba(114,137,218,.4);background:rgba(114,137,218,.07); }
+.hb-yt:hover  { background:rgba(255,64,64,.16); }
+.hb-tt:hover  { background:rgba(0,242,234,.14); }
+.hb-dc:hover  { background:rgba(114,137,218,.14); }
+
+/* ── SCROLL INDICATOR ── */
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: .3;
+  animation: bob 2.4s ease-in-out infinite;
+}
+.scroll-hint span {
+  font-family: 'Share Tech Mono';
+  font-size: .52rem;
+  letter-spacing: .35em;
+  color: var(--cyan);
+}
+@keyframes bob {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(7px); }
+}
+
+/* ── VEREDICTO TABLE ── */
+.vtable { width: 100%; border-collapse: collapse; margin-top: 28px; }
+.vtable th {
+  font-family: 'Share Tech Mono';
+  font-size: .56rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0,245,255,.14);
+}
+.vtable td {
+  padding: 12px 12px;
+  font-size: .84rem;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  vertical-align: middle;
+}
+.vtable tr:hover td { background: rgba(255,255,255,.02); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 52px 32px 40px;
+  border-top: 1px solid rgba(0,245,255,.08);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Bebas Neue';
+  font-size: 2.8rem;
+  letter-spacing: .12em;
+  background: linear-gradient(135deg, var(--cyan), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.footer-text {
+  font-family: 'Share Tech Mono';
+  font-size: .54rem;
+  letter-spacing: .12em;
+  color: var(--dim);
+  opacity: .4;
+  line-height: 2.1;
+  margin-top: 16px;
+}
+
+/* ── PREORDER BANNER ── */
+.preorder-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 22px;
+  background: linear-gradient(135deg,rgba(255,140,0,.1),rgba(255,0,110,.06));
+  border: 1px solid rgba(255,140,0,.28);
+  border-radius: 6px;
+  margin-top: 22px;
+}
+
+/* ── CONSOLE PRICES ── */
+.price-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 12px;
+  margin-top: 32px;
+}
+.price-card {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 6px;
+  padding: 18px 16px;
+  transition: transform .2s, box-shadow .2s;
+}
+.price-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+[data-theme="light"] .price-card { background: #fff; border-color: rgba(0,0,0,.08); box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+
+/* ── NOTE BOX ── */
+.note-box {
+  padding: 14px 18px;
+  background: rgba(255,140,0,.06);
+  border: 1px solid rgba(255,140,0,.2);
+  border-left: 3px solid var(--orange);
+  font-size: .83rem;
+  color: var(--dim);
+  line-height: 1.65;
+  border-radius: 0 4px 4px 0;
+}
+.note-box strong { color: var(--orange); }
+
+/* ── PLAYLIST PLAYER ── */
+.playlist-player {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,0,110,.18);
+  box-shadow: 0 0 50px rgba(0,0,0,.7);
+  aspect-ratio: 16/9;
+  position: relative;
+  background: #000;
+  max-width: 860px;
+  margin: 32px auto 0;
+}
+.playlist-player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+</style>
+</head>
+<body>
+
+<!-- VIDEO MODAL -->
+<div id="video-modal">
+  <button class="vm-close" onclick="closeVideoModal()">✕</button>
+  <div class="vm-title" id="vm-title"></div>
+  <div class="vm-frame-wrap">
+    <iframe id="vm-frame" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+  </div>
+  <a class="vm-ytlink" id="vm-ytlink" href="#" target="_blank">▶ ABRIR NO YOUTUBE</a>
+</div>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-lbl" id="lb-lbl"></div>
+  <div class="lb-nav">
+    <button class="lb-btn" onclick="lbNav(-1)">◀ ANTERIOR</button>
+    <button class="lb-btn" onclick="lbNav(1)">PRÓXIMA ▶</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">GTA<span style="color:var(--pink)">VI</span></div>
+  <ul class="nav-links">
+    <li><a href="#trailers">TRAILERS</a></li>
+    <li><a href="#pc">PC</a></li>
+    <li><a href="#consoles">CONSOLES</a></li>
+    <li><a href="#edicoes">EDIÇÕES</a></li>
+    <li><a href="#videos">VÍDEOS</a></li>
+    <li><a href="#quiz">QUIZ</a></li>
+    <li><a href="#canal">CANAL</a></li>
+  </ul>
+  <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema claro/escuro">🌙</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <canvas id="particles"></canvas>
+  <div class="hero-content">
+    <p class="hero-eyebrow">// guia completo de hardware · 2026 · by robzeraw</p>
+    <div class="hero-gta">GTA VI</div>
+    <div class="hero-vi">GRAND THEFT AUTO VI — VICE CITY</div>
+    <p class="hero-sub">Seu PC, Xbox ou PS5 está <span>pronto pra Vice City?</span><br>Tudo que você precisa saber antes de 19 de novembro.</p>
+    <div class="hero-date">🗓 LANÇAMENTO — 19 DE NOVEMBRO DE 2026</div>
+    <div class="hero-badges">
+      <a href="https://youtube.com/@robzeraw" target="_blank" class="hbadge hb-yt">▶ YOUTUBE</a>
+      <a href="https://tiktok.com/@robzeraw" target="_blank" class="hbadge hb-tt">♪ TIKTOK</a>
+      <a href="https://discord.gg/nzMvd9WHpN" target="_blank" class="hbadge hb-dc">💬 DISCORD</a>
+    </div>
+    <p class="hero-disclaimer">⚠ Requisitos de PC baseados em leaks — sem confirmação oficial da Rockstar. Infos de console via leaks de varejos europeus e Digital Foundry.</p>
+  </div>
+  <div class="scroll-hint"><span>SCROLL</span><span>↓</span></div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="countdown-wrap">
+  <div style="max-width:860px;margin:0 auto;text-align:center;">
+    <span class="sec-label">// faltam para o lançamento</span>
+    <h2 style="font-family:'Bebas Neue';font-size:clamp(1.4rem,4vw,2.4rem);letter-spacing:.08em;margin-bottom:36px;">
+      GTA VI CHEGA EM <span style="color:var(--pink)">19 DE NOVEMBRO DE 2026</span>
+    </h2>
+    <div class="cd-row">
+      <div class="cd-block">
+        <div class="cd-box" id="cd-d">146</div>
+        <div class="cd-lbl">Dias</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block">
+        <div class="cd-box" id="cd-h">00</div>
+        <div class="cd-lbl">Horas</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block">
+        <div class="cd-box" id="cd-m">00</div>
+        <div class="cd-lbl">Minutos</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block">
+        <div class="cd-box" id="cd-s">00</div>
+        <div class="cd-lbl">Segundos</div>
+      </div>
+    </div>
+    <p class="cd-note">🎮 PS5 • Xbox Series X|S · Guia por <b style="color:var(--pink)">Robzeraw</b></p>
+  </div>
+</div>
+
+<div class="divider"></div>
+<!-- TRAILERS -->
+<div id="trailers">
+<div class="wrap">
+  <div class="sec-head">
+    <span class="sec-label">// trailers oficiais</span>
+    <h2 class="sec-title">TRAILERS <span class="ap">ROCKSTAR</span></h2>
+    <p class="sec-desc">Clique no play para assistir os trailers oficiais do GTA VI.</p>
+  </div>
+  <div class="trailers-grid">
+    <div class="trailer-card" onclick="openVideoModal('QdBZExpgErs','Trailer Oficial #1 — Dezembro 2023')">
+      <div class="trailer-thumb-wrap">
+        <img src="https://img.youtube.com/vi/QdBZExpgErs/maxresdefault.jpg"
+             onerror="this.src='https://img.youtube.com/vi/QdBZExpgErs/hqdefault.jpg'" alt="GTA VI Trailer 1">
+        <div class="trailer-overlay"><div class="play-circle">▶</div></div>
+        <div class="trailer-badge">TRAILER #1</div>
+      </div>
+      <div class="trailer-info">
+        <div class="trailer-title">GTA VI — Trailer Oficial #1</div>
+        <div class="trailer-meta">Dezembro 2023 · Rockstar Games · Mais visto em 24h na história do YT</div>
+      </div>
+    </div>
+    <div class="trailer-card" onclick="openVideoModal('cLouP7jCYvA','Trailer Oficial #2 — Maio 2025')">
+      <div class="trailer-thumb-wrap">
+        <img src="https://img.youtube.com/vi/cLouP7jCYvA/maxresdefault.jpg"
+             onerror="this.src='https://img.youtube.com/vi/cLouP7jCYvA/hqdefault.jpg'" alt="GTA VI Trailer 2">
+        <div class="trailer-overlay"><div class="play-circle">▶</div></div>
+        <div class="trailer-badge">TRAILER #2</div>
+      </div>
+      <div class="trailer-info">
+        <div class="trailer-title">GTA VI — Trailer Oficial #2</div>
+        <div class="trailer-meta">Maio 2025 · Rockstar Games · Data de lançamento confirmada</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+<!-- TIMELINE -->
+<div id="timeline">
+<div class="wrap-sm">
+  <div class="sec-head">
+    <span class="sec-label">// linha do tempo</span>
+    <h2 class="sec-title">TIMELINE <span class="ac">GTA VI</span></h2>
+    <p class="sec-desc">Da confirmação ao lançamento — todos os momentos que marcaram a história do jogo mais aguardado de todos os tempos.</p>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl-line"></div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="color:var(--pink);border-color:var(--pink)"></div>
+      <div class="tl-card">
+        <div class="tl-date">02 FEVEREIRO 2022</div>
+        <div class="tl-title" style="color:var(--pink)">ROCKSTAR CONFIRMA O GTA VI</div>
+        <div class="tl-desc">Após anos de especulação, a Rockstar Games confirmou oficialmente o desenvolvimento. Primeiro e simples comunicado — mas o suficiente para o mundo inteiro entrar em colapso.</div>
+        <span class="tl-badge" style="color:var(--green);border-color:rgba(57,255,20,.35);background:rgba(57,255,20,.07)">✅ CONFIRMADO</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="color:var(--red);border-color:var(--red)"></div>
+      <div class="tl-card">
+        <div class="tl-date">SETEMBRO 2022</div>
+        <div class="tl-title" style="color:var(--red)">MAIOR VAZAMENTO DA HISTÓRIA DOS GAMES</div>
+        <div class="tl-desc">Mais de 90 vídeos de gameplay em desenvolvimento vazaram online. A Rockstar confirmou a autenticidade. Um momento sem precedentes na indústria — e que revelou Vice City meses antes da hora.</div>
+        <span class="tl-badge" style="color:var(--red);border-color:rgba(255,49,49,.35);background:rgba(255,49,49,.07)">⚡ HISTÓRICO</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="color:var(--cyan);border-color:var(--cyan)"></div>
+      <div class="tl-card">
+        <div class="tl-date">04 DEZEMBRO 2023</div>
+        <div class="tl-title" style="color:var(--cyan)">TRAILER #1 — LUCIA E JASON</div>
+        <div class="tl-desc">O trailer mais visto da história do YouTube em 24 horas. Vice City confirmada. Lucia como protagonista feminina inédita na franquia. Lançamento prometido para 2025 — mas o hype era imparável.</div>
+        <span class="tl-badge" style="color:var(--cyan);border-color:rgba(0,245,255,.35);background:rgba(0,245,255,.07)">✅ CONFIRMADO</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="color:var(--yellow);border-color:var(--yellow)"></div>
+      <div class="tl-card">
+        <div class="tl-date">MAIO 2025</div>
+        <div class="tl-title" style="color:var(--yellow)">TRAILER #2 + DATA DE LANÇAMENTO OFICIAL</div>
+        <div class="tl-desc">Gameplay extensivo, Lucia e Jason em ação pelas ruas de Vice City. Data oficial: 26 de maio de 2026 — depois adiado para 19/11/2026. PS5 e Xbox Series X|S confirmados como plataformas de lançamento.</div>
+        <span class="tl-badge" style="color:var(--yellow);border-color:rgba(255,224,51,.35);background:rgba(255,224,51,.07)">✅ CONFIRMADO</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="color:var(--orange);border-color:var(--orange)"></div>
+      <div class="tl-card">
+        <div class="tl-date">25 JUNHO 2026</div>
+        <div class="tl-title" style="color:var(--orange)">PRÉ-VENDA ABERTA — BRASIL E MUNDO</div>
+        <div class="tl-desc">PlayStation Store e Xbox Store abrem pré-venda simultaneamente. Standard US$79,99 / Ultimate US$99,99. Bônus Vintage Vice City Pack para quem pré-comprar qualquer edição.</div>
+        <span class="tl-badge" style="color:var(--orange);border-color:rgba(255,140,0,.35);background:rgba(255,140,0,.07)">🔥 AGORA</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="color:#aaa;border-color:#aaa"></div>
+      <div class="tl-card">
+        <div class="tl-date">12 NOVEMBRO 2026</div>
+        <div class="tl-title" style="color:#aaa">PRÉ-DOWNLOAD LIBERADO</div>
+        <div class="tl-desc">Versão física (com código de download na caixa) disponível nas lojas. Todos os compradores — físico e digital — podem iniciar o pré-download 7 dias antes do lançamento. Sem disco.</div>
+        <span class="tl-badge" style="color:#aaa;border-color:rgba(170,170,170,.3);background:rgba(170,170,170,.07)">🗓 EM BREVE</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="color:var(--green);border-color:var(--green)"></div>
+      <div class="tl-card">
+        <div class="tl-date">19 NOVEMBRO 2026</div>
+        <div class="tl-title" style="color:var(--green)">🎮 LANÇAMENTO GLOBAL — GTA VI</div>
+        <div class="tl-desc">PS5 e Xbox Series X|S. Vice City abre as portas. Lucia e Jason tomam as ruas. O jogo mais aguardado da história finalmente chega. Seja bem-vindo de volta ao Vice City.</div>
+        <span class="tl-badge" style="color:var(--green);border-color:rgba(57,255,20,.35);background:rgba(57,255,20,.07)">🚀 CHEGANDO</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="color:var(--dim);border-color:var(--dim)"></div>
+      <div class="tl-card">
+        <div class="tl-date">2027 — PREVISÃO</div>
+        <div class="tl-title" style="color:var(--dim)">🖥️ VERSÃO PC</div>
+        <div class="tl-desc">Rockstar não anunciou. Baseado no histórico — GTA V saiu em consoles em 2013 e chegou ao PC em 2015 — a versão PC é esperada entre Q2 e Q3 de 2027 com ray tracing completo e resolução ilimitada.</div>
+        <span class="tl-badge" style="color:var(--dim);border-color:rgba(122,110,144,.3);background:rgba(122,110,144,.05)">❓ PREVISTO</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+<!-- TEASER PC -->
+<div class="wrap">
+  <div class="teaser-box fade">
+    <div class="teaser-left">
+      <span class="teaser-icon">🖥️</span>
+      <h2 class="teaser-title">SEU PC <span>AGUENTA</span> O GTA VI?</h2>
+      <p class="teaser-desc">O RAGE 9 é o engine mais exigente da história dos games. Antes de ver os requisitos completos, descubra em qual tier o seu PC se encaixa — e quanto FPS você vai tirar em Vice City.</p>
+      <div class="teaser-btns">
+        <a href="#pc" class="teaser-btn tb-primary">🎮 VER REQUISITOS PC</a>
+        <a href="#calc" class="teaser-btn tb-secondary">⚡ CALCULAR MEU FPS</a>
+      </div>
+    </div>
+    <div class="teaser-right">
+      <div class="teaser-fps-preview">
+        <div class="teaser-fps-num">?</div>
+        <div class="teaser-fps-lbl">FPS EM 1080P</div>
+        <div class="teaser-tiers" style="margin-top:12px">
+          <span class="tts" style="color:var(--red);border-color:var(--red)">🔴 T1</span>
+          <span class="tts" style="color:var(--yellow);border-color:var(--yellow)">🟡 T2</span>
+          <span class="tts" style="color:var(--green);border-color:var(--green)">🟢 T3</span>
+          <span class="tts" style="color:var(--cyan);border-color:var(--cyan)">🔵 T4</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ENGINE -->
+<!-- ENGINE -->
+<div id="engine">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-label">// motor gráfico</span>
+    <h2 class="sec-title">POR QUE O <span class="ac">RAGE 9</span> É UM MONSTRO</h2>
+    <p class="sec-desc">O engine por trás do GTA VI — e por que ele vai exigir tanto do seu hardware.</p>
+  </div>
+  <img class="banner-img fade"
+    src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=85&fit=crop"
+    alt="Tech — RAGE 9">
+  <div class="rage-box">
+    <div class="rage-grid">
+      <div class="rage-item fade"><div class="rage-item-t">🌊 FÍSICA DE ÁGUA</div><p>Simulação de oceano em tempo real inédita. O Atlântico de Vice City usa dinâmica de fluidos nunca vista em gaming — devora GPU em cada frame.</p></div>
+      <div class="rage-item fade"><div class="rage-item-t">💡 GLOBAL ILLUMINATION</div><p>Iluminação rebatendo em asfalto molhado, capôs e vidros em tempo real. Cada néon do Vice Beach reflete no chão. Exige GPU de alto nível.</p></div>
+      <div class="rage-item fade"><div class="rage-item-t">🧠 DENSIDADE DE NPCs</div><p>A maior quantidade de pedestres únicos com IA independente já vista em gaming. CPU calcula pathfinding de milhares de entidades por frame.</p></div>
+      <div class="rage-item fade"><div class="rage-item-t">📦 ASSET STREAMING</div><p>O mundo carrega em tempo real conforme você dirige. Sem NVMe SSD o asfalto desaparece sob seus pneus. HDD é completamente incompatível.</p></div>
+      <div class="rage-item fade"><div class="rage-item-t">🔦 RAY TRACING HÍBRIDO</div><p>RT híbrido com sombras e reflexos reais nas plataformas que suportam, fallback inteligente para manter desempenho aceitável.</p></div>
+      <div class="rage-item fade"><div class="rage-item-t">🎯 CPU BOUND</div><p>GTA VI é limitado pelo processador. Carros, polícia, IA — tudo calculado no CPU. Mínimo de 8 núcleos. Quad-core está aposentado em 2026.</p></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PC -->
+<div id="pc">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-label">// pc gaming · versão esperada 2027</span>
+    <h2 class="sec-title">REQUISITOS <span class="ac">PC</span></h2>
+    <p class="sec-desc">4 tiers com peças, FPS estimado, resolução e custo aproximado em Reais.</p>
+  </div>
+
+  <img class="banner-img fade"
+    src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=1400&q=85&fit=crop"
+    alt="Gaming PC">
+
+  <div class="pc-layout fade">
+  <!-- SIDEBAR TABS -->
+  <div class="pc-sidebar">
+    <div class="pc-tab active" id="pctab-1" onclick="showPcPanel(1)" style="--tc:var(--red)">
+      <div>
+        <div class="pc-tab-badge" style="color:var(--red);border-color:var(--red);background:rgba(255,49,49,.1)">🔴 T1</div>
+        <div class="pc-tab-name" style="color:var(--red);margin-top:5px">MÍNIMO</div>
+        <div class="pc-tab-fps">25–35 FPS · 720p</div>
+        <div class="pc-tab-fps">R$ 4k–6k</div>
+      </div>
+    </div>
+    <div class="pc-tab" id="pctab-2" onclick="showPcPanel(2)" style="--tc:var(--yellow)">
+      <div>
+        <div class="pc-tab-badge" style="color:var(--yellow);border-color:var(--yellow);background:rgba(255,224,51,.1)">🟡 T2</div>
+        <div class="pc-tab-name" style="color:var(--yellow);margin-top:5px">RECOMENDADO</div>
+        <div class="pc-tab-fps">45–60 FPS · 1080p</div>
+        <div class="pc-tab-fps">R$ 7k–10k</div>
+      </div>
+    </div>
+    <div class="pc-tab" id="pctab-3" onclick="showPcPanel(3)" style="--tc:var(--green)">
+      <div>
+        <div class="pc-tab-badge" style="color:var(--green);border-color:var(--green);background:rgba(57,255,20,.1)">🟢 T3</div>
+        <div class="pc-tab-name" style="color:var(--green);margin-top:5px">FULL HD</div>
+        <div class="pc-tab-fps">60–90 FPS · 1080p</div>
+        <div class="pc-tab-fps">R$ 12k–17k</div>
+      </div>
+    </div>
+    <div class="pc-tab" id="pctab-4" onclick="showPcPanel(4)" style="--tc:var(--cyan)">
+      <div>
+        <div class="pc-tab-badge" style="color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.1)">🔵 T4</div>
+        <div class="pc-tab-name" style="color:var(--cyan);margin-top:5px">4K ULTRA</div>
+        <div class="pc-tab-fps">60–100+ FPS · 4K</div>
+        <div class="pc-tab-fps">R$ 30k–50k+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT PANELS -->
+  <div class="pc-content">
+
+    <!-- TIER 1 -->
+    <div class="pc-panel active" id="pcpanel-1">
+      <img class="pc-panel-img" src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=900&q=80&fit=crop" alt="PC T1" onerror="this.style.display='none'">
+      <div class="pc-panel-body">
+        <div class="pc-spec-row"><span class="pcsl">CPU</span><span class="pcsv">i5-6600K / i5-8400<small>ou Ryzen 5 1600 / 2600</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">GPU</span><span class="pcsv">GTX 1660 6GB / GTX 1650 Super<small>ou RX 5500 XT 8GB / RX 580 8GB</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">RAM</span><span class="pcsv">12 GB DDR4 3000–3200MHz<small>dual channel — 2x6GB ou 2x8GB</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">SSD</span><span class="pcsv">NVMe 150 GB mínimo<small>HDD incompatível com RAGE 9</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">VRAM</span><span class="pcsv">6–8 GB<small>no limite — texturas LOW</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">QUALIDADE</span><span class="pcsv">Baixa / Mínima<small>sem RT, texturas básicas</small></span></div>
+        <div class="pc-perf" style="background:rgba(255,49,49,.05);border:1px solid rgba(255,49,49,.12);">
+          <div class="pc-perf-row"><span class="pc-pl">FPS ESTIMADO</span><span class="pc-pv" style="color:var(--red)">25–35 FPS</span></div>
+          <div class="pc-bar-track"><div class="pc-bar-fill" style="width:18%;background:var(--red)"></div></div>
+          <div class="pc-perf-row" style="margin-top:6px"><span class="pc-pl">Experiência</span><span class="pc-pv" style="color:var(--red);font-size:.8rem">SOFRÍVEL</span></div>
+        </div>
+        <div class="pc-price">
+          <div class="pc-price-lbl">CUSTO ESTIMADO BR</div>
+          <div class="pc-price-val" style="color:var(--red)">R$ 4.000–6.000</div>
+          <div class="pc-price-note">GTX 1660: ~R$900–1.400 · i5-8400: ~R$350–550 · Fonte 500W, 12GB DDR4, NVMe básico.</div>
+          <span class="pc-wtag" style="color:var(--red);border-color:var(--red);background:rgba(255,49,49,.07)">⚠ 6GB VRAM NO LIMITE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER 2 -->
+    <div class="pc-panel" id="pcpanel-2">
+      <img class="pc-panel-img" src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=900&q=80&fit=crop" alt="PC T2" onerror="this.style.display='none'">
+      <div class="pc-panel-body">
+        <div class="pc-spec-row"><span class="pcsl">CPU</span><span class="pcsv">i5-12400F / i7-10700<small>ou Ryzen 5 5600X / 5600G</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">GPU</span><span class="pcsv">RTX 3060 12GB / RTX 3070<small>ou RX 6700 XT 12GB / RX 6800 16GB</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">RAM</span><span class="pcsv">16 GB DDR4 3200–3600MHz<small>dual channel — 2x8GB ideal</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">SSD</span><span class="pcsv">NVMe 500 GB PCIe 3.0<small>≥2500 MB/s — Kingston NV2 / WD SN580</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">VRAM</span><span class="pcsv">12 GB<small>confortável para texturas High</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">QUALIDADE</span><span class="pcsv">Média / Alta<small>RT desligado ou básico</small></span></div>
+        <div class="pc-perf" style="background:rgba(255,224,51,.04);border:1px solid rgba(255,224,51,.12);">
+          <div class="pc-perf-row"><span class="pc-pl">FPS ESTIMADO</span><span class="pc-pv" style="color:var(--yellow)">45–60 FPS</span></div>
+          <div class="pc-bar-track"><div class="pc-bar-fill" style="width:42%;background:var(--yellow)"></div></div>
+          <div class="pc-perf-row" style="margin-top:6px"><span class="pc-pl">Experiência</span><span class="pc-pv" style="color:var(--yellow);font-size:.8rem">JOGÁVEL</span></div>
+        </div>
+        <div class="pc-price">
+          <div class="pc-price-lbl">CUSTO ESTIMADO BR</div>
+          <div class="pc-price-val" style="color:var(--yellow)">R$ 7.000–10.000</div>
+          <div class="pc-price-note">RTX 3060 12GB: ~R$2.000–2.600 · Ryzen 5 5600X: ~R$700–900 · B550, fonte 650W, 16GB DDR4.</div>
+          <span class="pc-wtag" style="color:var(--yellow);border-color:var(--yellow);background:rgba(255,224,51,.07)">⚡ USE DLSS/FSR PARA 60fps</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER 3 -->
+    <div class="pc-panel" id="pcpanel-3">
+      <img class="pc-panel-img" src="https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=900&q=80&fit=crop" alt="PC T3" onerror="this.style.display='none'">
+      <div class="pc-panel-body">
+        <div class="pc-spec-row"><span class="pcsl">CPU</span><span class="pcsv">i5-13600K / i7-12700<small>ou Ryzen 7 5800X3D / 7700X ★</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">GPU</span><span class="pcsv">RTX 4070 12GB / RTX 4060 Ti 16GB<small>ou RX 7800 XT 16GB / RX 7700 XT</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">RAM</span><span class="pcsv">32 GB DDR4/DDR5 4800MHz+<small>2x16GB — evite misturar marcas</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">SSD</span><span class="pcsv">NVMe 1 TB PCIe 4.0<small>≥5000 MB/s — Samsung 980 Pro / WD SN850X</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">VRAM</span><span class="pcsv">12–16 GB<small>Ultra confortável em 1080p</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">QUALIDADE</span><span class="pcsv">Alta / Ultra<small>RT parcial ativado</small></span></div>
+        <div class="pc-perf" style="background:rgba(57,255,20,.04);border:1px solid rgba(57,255,20,.12);">
+          <div class="pc-perf-row"><span class="pc-pl">FPS ESTIMADO</span><span class="pc-pv" style="color:var(--green)">60–90 FPS</span></div>
+          <div class="pc-bar-track"><div class="pc-bar-fill" style="width:70%;background:var(--green)"></div></div>
+          <div class="pc-perf-row" style="margin-top:6px"><span class="pc-pl">Experiência</span><span class="pc-pv" style="color:var(--green);font-size:.8rem">EXCELENTE</span></div>
+        </div>
+        <div class="pc-price">
+          <div class="pc-price-lbl">CUSTO ESTIMADO BR</div>
+          <div class="pc-price-val" style="color:var(--green)">R$ 12.000–17.000</div>
+          <div class="pc-price-note">RTX 4070 12GB: ~R$3.700–4.600 · Ryzen 7 5800X3D: ~R$1.200–1.500 · 32GB DDR4, fonte 750W.</div>
+          <span class="pc-wtag" style="color:var(--green);border-color:var(--green);background:rgba(57,255,20,.07)">✓ MELHOR CUSTO-BENEFÍCIO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER 4 -->
+    <div class="pc-panel" id="pcpanel-4">
+      <img class="pc-panel-img" src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=900&q=80&fit=crop" alt="PC T4" onerror="this.style.display='none'">
+      <div class="pc-panel-body">
+        <div class="pc-spec-row"><span class="pcsl">CPU</span><span class="pcsv">i9-13900K / i9-14900KF<small>ou Ryzen 9 7950X3D / 9900X ★★</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">GPU</span><span class="pcsv">RTX 5080 16GB / RTX 4090 24GB<small>ou RX 9070 XT 16GB</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">RAM</span><span class="pcsv">64 GB DDR5 6000MHz<small>2x32GB — G.Skill / Corsair Dominator</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">SSD</span><span class="pcsv">NVMe 2 TB PCIe 5.0<small>≥7000 MB/s — WD SN850X / Samsung 990 Pro</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">VRAM</span><span class="pcsv">16–24 GB<small>Ultra sem qualquer compromisso</small></span></div>
+        <div class="pc-spec-row"><span class="pcsl">QUALIDADE</span><span class="pcsv">Ultra + RT MAX<small>path tracing + DLSS 3 FG</small></span></div>
+        <div class="pc-perf" style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.14);">
+          <div class="pc-perf-row"><span class="pc-pl">FPS ESTIMADO</span><span class="pc-pv" style="color:var(--cyan)">60–100+ FPS</span></div>
+          <div class="pc-bar-track"><div class="pc-bar-fill" style="width:100%;background:linear-gradient(90deg,var(--cyan),var(--pink))"></div></div>
+          <div class="pc-perf-row" style="margin-top:6px"><span class="pc-pl">Experiência</span><span class="pc-pv" style="color:var(--cyan);font-size:.8rem">DEFINITIVA</span></div>
+        </div>
+        <div class="pc-price">
+          <div class="pc-price-lbl">CUSTO ESTIMADO BR</div>
+          <div class="pc-price-val" style="color:var(--cyan)">R$ 30.000–50.000+</div>
+          <div class="pc-price-note">RTX 5080: ~R$12k–18k · i9-13900K: ~R$3.5k–4.5k · DDR5 64GB, Z790, water cooling 360mm.</div>
+          <span class="pc-wtag" style="color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.07)">👑 ACIMA DE TUDO</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class="
+
+<div class="divider"></div>
+
+<div style="margin-top:36px">
+    <span class="sec-label">// comparativo de gpus</span>
+    <h2 class="sec-title" style="font-size:clamp(1.5rem,3vw,2.4rem)">FPS ESTIMADO POR <span class="ac">GPU</span></h2>
+    <p class="sec-desc" style="margin-bottom:0">1080p · Ultra · sem upscaling · clique para expandir</p>
+    <div class="gpu-accordion fade" id="gpu-acc">
+      <div class="gpu-acc-head" onclick="toggleGpuAcc()">
+        <div>
+          <div class="gpu-acc-title">VER TABELA COMPLETA DE GPUs ▼</div>
+          <div class="gpu-acc-sub">GTX 1660 Super → RTX 5080 · AMD RX 6600 → RX 9070 XT · FPS em 1080p / 1440p / 4K</div>
+        </div>
+        <span class="gpu-acc-chev">▼</span>
+      </div>
+      <div class="gpu-acc-body">
+        <div class="gpu-wrap fade">
+      <table class="gpu-table">
+        <thead><tr><th>GPU</th><th>VRAM</th><th>1080p FPS</th><th>1440p FPS</th><th>4K FPS</th><th>STATUS</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:700;color:var(--red)">GTX 1660 Super</td>
+            <td>6 GB</td>
+            <td><div class="gpu-fps" style="color:var(--red)">25–35</div><div class="gpu-bar" style="width:16%;background:var(--red)"></div></td>
+            <td style="color:var(--dim)">Não indicado</td>
+            <td style="color:var(--dim)">Inviável</td>
+            <td><span class="wtag" style="color:var(--red);border-color:var(--red);background:rgba(255,49,49,.08)">MÍNIMO</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;color:var(--yellow)">RTX 3060 12GB</td>
+            <td>12 GB</td>
+            <td><div class="gpu-fps" style="color:var(--yellow)">45–60</div><div class="gpu-bar" style="width:38%;background:var(--yellow)"></div></td>
+            <td><div class="gpu-fps" style="color:var(--yellow)">30–42</div></td>
+            <td style="color:var(--dim)">Não indicado</td>
+            <td><span class="wtag" style="color:var(--yellow);border-color:var(--yellow);background:rgba(255,224,51,.08)">RECOMENDADO</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;color:#f0a500">RTX 4060 Ti 16GB</td>
+            <td>16 GB</td>
+            <td><div class="gpu-fps" style="color:#f0a500">55–72</div><div class="gpu-bar" style="width:54%;background:#f0a500"></div></td>
+            <td><div class="gpu-fps" style="color:#f0a500">38–52</div></td>
+            <td><div class="gpu-fps" style="color:var(--dim)">20–28</div></td>
+            <td><span class="wtag" style="color:#f0a500;border-color:#f0a500;background:rgba(240,165,0,.08)">BOM</span></td>
+          </tr>
+          <tr style="background:rgba(57,255,20,.018)">
+            <td style="font-weight:700;color:var(--green)">RTX 4070 12GB ★</td>
+            <td>12 GB</td>
+            <td><div class="gpu-fps" style="color:var(--green)">65–88</div><div class="gpu-bar" style="width:70%;background:var(--green)"></div></td>
+            <td><div class="gpu-fps" style="color:var(--green)">50–66</div></td>
+            <td><div class="gpu-fps" style="color:var(--yellow)">28–38</div></td>
+            <td><span class="wtag" style="color:var(--green);border-color:var(--green);background:rgba(57,255,20,.08)">★ CUSTO-BENEFÍCIO</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;color:#44aaff">RTX 4070 Ti Super</td>
+            <td>16 GB</td>
+            <td><div class="gpu-fps" style="color:#44aaff">80–102</div><div class="gpu-bar" style="width:82%;background:#44aaff"></div></td>
+            <td><div class="gpu-fps" style="color:#44aaff">62–80</div></td>
+            <td><div class="gpu-fps" style="color:var(--yellow)">36–50</div></td>
+            <td><span class="wtag" style="color:#44aaff;border-color:#44aaff;background:rgba(68,170,255,.08)">EXCELENTE</span></td>
+          </tr>
+          <tr style="background:rgba(0,245,255,.018)">
+            <td style="font-weight:700;color:var(--cyan)">RTX 5080 16GB</td>
+            <td>16 GB</td>
+            <td><div class="gpu-fps" style="color:var(--cyan)">105–135</div><div class="gpu-bar" style="width:100%;background:linear-gradient(90deg,var(--cyan),var(--pink))"></div></td>
+            <td><div class="gpu-fps" style="color:var(--cyan)">82–108</div></td>
+            <td><div class="gpu-fps" style="color:var(--cyan)">55–75</div></td>
+            <td><span class="wtag" style="color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.08)">👑 TOPO</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      </div>
+    </div>
+  </div>
+
+<div style="margin-top:55px">
+    <span class="sec-label">// ferramenta interativa</span>
+    <h2 class="sec-title" style="font-size:clamp(1.8rem,4vw,3rem)">CALCULADORA DE <span class="ac">FPS</span></h2>
+    <p class="sec-desc">Selecione sua GPU e resolução alvo para estimar seu desempenho no GTA VI.</p>
+    <div class="calc-box fade">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:22px;">
+        <div class="calc-group">
+          <label class="calc-lbl">🎮 GPU (Placa de Vídeo)</label>
+          <select class="calc-sel" id="calc-gpu" onchange="doCalc()">
+            <optgroup label="── NVIDIA GeForce ──">
+              <option value="0">GTX 1650 Super 4GB</option>
+              <option value="1">GTX 1660 Super 6GB</option>
+              <option value="2">RTX 3060 12GB</option>
+              <option value="3">RTX 3070 8GB</option>
+              <option value="4">RTX 3080 10GB</option>
+              <option value="5">RTX 4060 8GB</option>
+              <option value="6">RTX 4060 Ti 16GB</option>
+              <option value="7" selected>RTX 4070 12GB</option>
+              <option value="8">RTX 4070 Ti Super 16GB</option>
+              <option value="9">RTX 4090 24GB</option>
+              <option value="10">RTX 5080 16GB</option>
+            </optgroup>
+            <optgroup label="── AMD Radeon ──">
+              <option value="11">RX 6600 8GB</option>
+              <option value="12">RX 6700 XT 12GB</option>
+              <option value="13">RX 6800 XT 16GB</option>
+              <option value="14">RX 7600 8GB</option>
+              <option value="15">RX 7700 XT 12GB</option>
+              <option value="16">RX 7800 XT 16GB</option>
+              <option value="17">RX 7900 XTX 24GB</option>
+              <option value="18">RX 9070 XT 16GB</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="calc-group">
+          <label class="calc-lbl">🖥️ Resolução Alvo</label>
+          <select class="calc-sel" id="calc-res" onchange="doCalc()">
+            <option value="0">720p</option>
+            <option value="1" selected>1080p (Full HD)</option>
+            <option value="2">1440p (2K / QHD)</option>
+            <option value="3">2160p (4K / UHD)</option>
+          </select>
+        </div>
+        <div class="calc-group">
+          <label class="calc-lbl">💾 Memória RAM</label>
+          <select class="calc-sel" id="calc-ram" onchange="doCalc()">
+            <option value="0">8 GB DDR4</option>
+            <option value="1">12 GB DDR4</option>
+            <option value="2" selected>16 GB DDR4</option>
+            <option value="3">32 GB DDR4/DDR5</option>
+            <option value="4">64 GB DDR5</option>
+          </select>
+        </div>
+        <div class="calc-group">
+          <label class="calc-lbl">⚙️ Processador (CPU)</label>
+          <select class="calc-sel" id="calc-cpu" onchange="doCalc()">
+            <optgroup label="── Intel Core ──">
+              <option value="0">i5-8400 / i5-9400F</option>
+              <option value="1">i5-10400F / i5-11400F</option>
+              <option value="2">i5-12400F / i5-13400F</option>
+              <option value="3">i7-10700 / i7-11700</option>
+              <option value="4" selected>i7-12700 / i7-13700K</option>
+              <option value="5">i9-13900K / i9-14900KF</option>
+            </optgroup>
+            <optgroup label="── AMD Ryzen ──">
+              <option value="6">Ryzen 5 3600 / 3600X</option>
+              <option value="7">Ryzen 5 5600 / 5600X</option>
+              <option value="8">Ryzen 7 5700X / 5800X</option>
+              <option value="9">Ryzen 7 5800X3D ★</option>
+              <option value="10">Ryzen 7 7700X / 7800X3D</option>
+              <option value="11">Ryzen 9 7950X3D ★★</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <div class="calc-result" style="margin-top:18px;">
+        <div>
+          <div style="font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:.25em;color:var(--dim);margin-bottom:4px">FPS ESTIMADO (SEM UPSCALING)</div>
+          <div class="calc-fps-big" id="r-fps" style="color:var(--green)">65–88</div>
+          <div style="font-family:'Share Tech Mono';font-size:.55rem;letter-spacing:.15em;color:var(--dim);margin-top:4px" id="r-upscale-label">Com DLSS/FSR:</div>
+        </div>
+        <div class="calc-meta">
+          <div class="calc-meta-row">CPU: <b id="r-cpu-note" style="color:var(--cyan)">Ótimo para GTA VI</b></div>
+          <div class="calc-meta-row">RAM: <b id="r-ram-note" style="color:var(--green)">16 GB — Ideal</b></div>
+          <div class="calc-meta-row">Qualidade sugerida: <b id="r-qual">Alta / Ultra</b></div>
+          <div class="calc-meta-row">Com DLSS 3 / FSR 3: <b id="r-dlss" style="color:var(--cyan)">100–145 FPS</b></div>
+          <div class="calc-meta-row">Experiência: <b id="r-exp" style="color:var(--green)">EXCELENTE</b></div>
+          <div class="calc-chip" id="r-chip" style="color:var(--green);border-color:var(--green);background:rgba(57,255,20,.07)">✓ Pronto pra Vice City!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="
+
+<div class="note-box fade" style="margin-top:20px"><strong>⚠ IMPORTANTE:</strong> Requisitos de PC são <strong>previsões baseadas em leaks</strong> — Rockstar não divulgou specs oficiais. GTA VI confirmado apenas para PS5 e Xbox Series X|S em 19/11/2026. Versão PC esperada para <strong>2027</strong>.</div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EDICOES -->
+<div id="edicoes" style="background:linear-gradient(135deg,#09001a,#160035);border-top:1px solid rgba(255,0,110,.1);border-bottom:1px solid rgba(255,0,110,.1);padding:72px 24px;">
+<div style="max-width:1200px;margin:0 auto;">
+  <div class="sec-head">
+    <span class="sec-label">// edições disponíveis</span>
+    <h2 class="sec-title">EDIÇÕES DO <span class="ap">GTA VI</span></h2>
+    <p class="sec-desc">Duas opções — jogo completo em ambas. A diferença está nos itens e conteúdo exclusivo da Ultimate.</p>
+  </div>
+
+  <div class="preorder-banner fade">
+    <div class="pb-icon">🎁</div>
+    <div>
+      <div class="pb-title">BÔNUS PRÉ-VENDA — VINTAGE VICE CITY PACK</div>
+      <div class="pb-desc">
+        Disponível para <b style="color:#e8dff5">qualquer edição</b> comprada antes de <b style="color:#e8dff5">20/11/2026</b> — digital ou físico com código. O pacote inclui itens inspirados no Vice City dos anos 80 e é desbloqueado progressivamente durante a história.
+        <br><br>
+        <b style="color:var(--orange)">O que vem no Vintage Vice City Pack:</b>
+        <span style="display:block;margin-top:6px;">🚗 Sedã <b style="color:#e8dff5">'55 Vapid Stanier</b> + garagem pessoal <b style="color:#e8dff5">Shore Court</b> perto da Ocean Beach (com armário de armas e Fence integrados)</span>
+        <span style="display:block;margin-top:4px;">👗 Roupas estilo anos 80 para Jason (terno de linho pastel vintage) e Lucia (vestido de paetê vermelho)</span>
+        <span style="display:block;margin-top:4px;">✂️ Penteados exclusivos para ambos — corte da "década da decadência"</span>
+        <span style="display:block;margin-top:4px;">🔫 Padrão de arma tropical — inspirado na camisa icônica de Tommy Vercetti</span>
+        <span style="display:block;margin-top:4px;">⭐ <b style="color:#e8dff5">1 mês grátis de GTA+</b> (apenas compras digitais)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="preload-note fade">
+    📥 <b>Pré-download liberado em 12/11/2026</b> — compras físicas e digitais de qualquer edição podem iniciar o download 7 dias antes do lançamento. A versão física não inclui disco — apenas um código de download na caixa.
+  </div>
+
+  <div class="edition-grid" style="margin-top:28px;">
+    <div class="edition-card ed-std fade">
+      <div class="ed-head">
+        <div class="ed-label">Edição</div>
+        <div class="ed-name">STANDARD</div>
+        <div class="ed-price">~R$ 449,90 <span style="font-size:.95rem;opacity:.55">/ US$79,99</span></div>
+      </div>
+      <div class="ed-body">
+        <div class="ed-item"><b>✅</b> Jogo base completo — GTA VI</div>
+        <div class="ed-item"><b>✅</b> Modo história completo — Lucia &amp; Jason</div>
+        <div class="ed-item"><b>✅</b> Acesso ao GTA Online Vice City</div>
+        <div class="ed-item" style="opacity:.45"><b>✗</b> Sem conteúdo exclusivo adicional</div>
+        <div class="ed-item" style="opacity:.45"><b>✗</b> Sem missões extras</div>
+        <div class="ed-item" style="opacity:.45"><b>✗</b> Sem veículos e armas exclusivos</div>
+        <div class="ed-note">
+          <div class="ed-bonus-title" style="color:var(--orange)">🎁 BÔNUS PRÉ-VENDA (se comprar antes de 20/11)</div>
+          Vintage Vice City Pack — sedã '55, garagem, roupas dos anos 80, padrão de arma tropical e 1 mês GTA+ (digital).
+        </div>
+      </div>
+    </div>
+
+    <div class="edition-card ed-ult fade">
+      <div class="ed-head">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+          <div>
+            <div class="ed-label">Edição</div>
+            <div class="ed-name">ULTIMATE</div>
+            <div class="ed-price">~R$ 549,90 <span style="font-size:.95rem;opacity:.55">/ US$99,99</span></div>
+          </div>
+          <span style="font-family:'Share Tech Mono';font-size:.52rem;letter-spacing:.1em;padding:4px 10px;border-radius:2px;background:rgba(0,245,255,.12);border:1px solid var(--cyan);color:var(--cyan);white-space:nowrap;margin-top:4px;flex-shrink:0;">👑 MAIS CONTEÚDO</span>
+        </div>
+      </div>
+      <div class="ed-body">
+        <div class="ed-item"><b style="color:var(--cyan)">✅</b> Tudo da Standard Edition</div>
+        <div style="font-family:'Share Tech Mono';font-size:.57rem;letter-spacing:.15em;color:var(--cyan);margin:8px 0 5px;opacity:.75;text-transform:uppercase;">+ CONTEÚDO EXCLUSIVO ULTIMATE</div>
+        <div class="ed-item"><b style="color:var(--cyan)">🚗</b> <span><b>'95 Grotti Cheetah</b> — esportivo retrô-futurista, disponível em fases avançadas da história</span></div>
+        <div class="ed-item"><b style="color:var(--cyan)">🚗</b> Outros veículos exclusivos — moto, off-road e aquático ao longo da campanha</div>
+        <div class="ed-item"><b style="color:var(--cyan)">🔫</b> <span><b>Hawk &amp; Little Morgan Revolvers</b> — dupla his-and-hers temática do Vercetti Estate, com grip de palmeiras entalhadas</span></div>
+        <div class="ed-item"><b style="color:var(--cyan)">🔫</b> Pistolas personalizadas de Jason (Girardi ES9) e Lucia (Klose K17) — variantes gravadas</div>
+        <div class="ed-item"><b style="color:var(--cyan)">🎯</b> <span><b>Missão exclusiva:</b> Raid ao compound do gang Ptt Youngin$ em Southside Vice City</span></div>
+        <div class="ed-item"><b style="color:var(--cyan)">🚙</b> <span><b>Missão exclusiva:</b> Classic Car Collection — restaurar carros abandonados para o colecionador Wyman</span></div>
+        <div class="ed-item"><b style="color:var(--cyan)">🛍️</b> <span><b>Loja exclusiva Goodtime Gear</b> — moda inspirada na série de TV Macca the Gator</span></div>
+        <div class="ed-item"><b style="color:var(--cyan)">💇</b> <span><b>Salão exclusivo</b> — penteados, tatuagens, maquiagem e acessórios para Jason e Lucia</span></div>
+        <div class="ed-item"><b style="color:var(--cyan)">🔧</b> <span><b>Ganado Retro Build</b> — mods exclusivos de muscle-car para a pickup Vapid Ganado de Jason</span></div>
+        <div class="ed-note">
+          <div class="ed-bonus-title" style="color:var(--cyan)">ℹ️ COMO OS ITENS SÃO DESBLOQUEADOS</div>
+          Os bônus da Ultimate <b style="color:#e8dff5">não chegam todos de uma vez</b> — eles são liberados progressivamente conforme você avança pelos capítulos da história. Isso mantém as recompensas integradas à narrativa, não apenas um dump de inventário no início.
+          <br><br>
+          <b style="color:var(--orange)">🎁 BÔNUS PRÉ-VENDA:</b> Vintage Vice City Pack incluso (se comprar antes de 20/11/2026).
+          <br>
+          <span style="color:var(--cyan);">📥 Pré-download:</span> liberado em 12/11/2026 — igual à Standard. Não há acesso antecipado ao jogo.
+          <br><br>
+          <span style="font-size:.77rem;opacity:.65;">A Upgrade para Ultimate estará disponível para compra separada a qualquer momento — mesmo depois do lançamento.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+<!-- CONSOLE PRICES -->
+<div class="prices-bg">
+  <div class="prices-inner">
+    <span class="sec-label">// quanto custa no brasil</span>
+    <h2 class="sec-title">PREÇOS DOS <span class="ap">CONSOLES</span></h2>
+    <p class="sec-desc">Valores aproximados em Reais no mercado brasileiro em 2026, já incluindo GTA VI Standard no carrinho.</p>
+    <div class="price-cards">
+      <div class="price-card pss fade">
+        <div class="pc-platform">Xbox</div>
+        <div class="pc-name">SERIES S</div>
+        <div class="pc-brl">~R$ 2.200</div>
+        <div class="pc-desc">Console: ~R$2.000–2.400 · GTA VI Standard: R$449,90 · Total: ~R$2.650–2.850. O mais barato da geração, mas com as maiores limitações para o GTA VI.</div>
+        <div class="pc-tag" style="color:var(--red);border-color:var(--red);background:rgba(255,49,49,.08)">⚠ EVITE SE POSSÍVEL</div>
+      </div>
+      <div class="price-card psx fade">
+        <div class="pc-platform">Xbox</div>
+        <div class="pc-name">SERIES X</div>
+        <div class="pc-brl">~R$ 4.500</div>
+        <div class="pc-desc">Console: ~R$4.000–5.000 · GTA VI Standard: R$449,90 · Total: ~R$4.500–5.450. Boa escolha para quem já está no ecossistema Xbox com Game Pass.</div>
+        <div class="pc-tag" style="color:var(--yellow);border-color:var(--yellow);background:rgba(255,224,51,.08)">⚡ BOA OPÇÃO</div>
+      </div>
+      <div class="price-card pps5 fade">
+        <div class="pc-platform">PlayStation</div>
+        <div class="pc-name">PS5</div>
+        <div class="pc-brl">~R$ 4.200</div>
+        <div class="pc-desc">Console Slim: ~R$3.800–4.500 · GTA VI Standard: R$449,90 · Total: ~R$4.250–4.950. DualSense haptics exclusivos + SSD mais rápido. Melhor custo-benefício.</div>
+        <div class="pc-tag" style="color:var(--green);border-color:var(--green);background:rgba(57,255,20,.07)">✓ RECOMENDADO</div>
+      </div>
+      <div class="price-card ppro fade">
+        <div class="pc-platform">PlayStation</div>
+        <div class="pc-name">PS5 PRO</div>
+        <div class="pc-brl">~R$ 7.500</div>
+        <div class="pc-desc">Console: ~R$7.000–8.000 · GTA VI Ultimate: R$549,90 · Total: ~R$7.550–8.550. PSSR + RT completo + 60fps estável + acesso antecipado. A experiência definitiva.</div>
+        <div class="pc-tag" style="color:var(--cyan);border-color:var(--cyan);background:rgba(0,245,255,.07)">👑 MELHOR EXPERIÊNCIA</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<!-- CONSOLES -->
+<div id="consoles">
+<div class="wrap">
+  <div class="sec-head">
+    <span class="sec-label">// performance em consoles</span>
+    <h2 class="sec-title">GTA VI NOS <span class="ap">CONSOLES</span></h2>
+    <p class="sec-desc">Selecione a plataforma para ver specs completas, modos gráficos e análise de performance.</p>
+  </div>
+  <div class="con-layout fade">
+    <div class="con-sidebar">
+      <div class="con-stab active" id="cstab-ss" onclick="showConPanel('ss')" style="--tc:#6cb4f7">
+        <div class="con-stab-plat">Xbox</div>
+        <div class="con-stab-name" style="color:#6cb4f7">Series S</div>
+        <div class="con-stab-fps">30 FPS · 1080p</div>
+        <div class="con-stab-fps">⚠ Mais limitado</div>
+      </div>
+      <div class="con-stab" id="cstab-sx" onclick="showConPanel('sx')" style="--tc:var(--blue)">
+        <div class="con-stab-plat">Xbox</div>
+        <div class="con-stab-name" style="color:var(--blue)">Series X</div>
+        <div class="con-stab-fps">30–60 FPS · 4K</div>
+        <div class="con-stab-fps">⚡ Boa escolha</div>
+      </div>
+      <div class="con-stab" id="cstab-ps5" onclick="showConPanel('ps5')" style="--tc:#4f8fff">
+        <div class="con-stab-plat">PlayStation</div>
+        <div class="con-stab-name" style="color:#4f8fff">PS5</div>
+        <div class="con-stab-fps">30–60 FPS · 4K</div>
+        <div class="con-stab-fps">✅ Recomendado</div>
+      </div>
+      <div class="con-stab" id="cstab-pro" onclick="showConPanel('pro')" style="--tc:var(--cyan)">
+        <div class="con-stab-plat">PlayStation</div>
+        <div class="con-stab-name" style="color:var(--cyan)">PS5 PRO</div>
+        <div class="con-stab-fps">60 FPS · 4K PSSR</div>
+        <div class="con-stab-fps">👑 O melhor</div>
+      </div>
+    </div>
+    <div class="con-panels">
+
+      <div class="con-panel-new active" id="cpanel-ss">
+        <img class="con-panel-img" src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=700&q=85&fit=crop" alt="Xbox Series S" onerror="this.style.display='none'">
+        <div class="con-panel-body">
+          <div class="con-panel-top">
+            <div><div style="font-family:'Share Tech Mono';font-size:.5rem;letter-spacing:.2em;color:var(--dim);">XBOX</div><div class="con-panel-name" style="color:#6cb4f7">Series S</div></div>
+            <span class="con-panel-tag" style="color:var(--red);border-color:rgba(255,49,49,.35);background:rgba(255,49,49,.08)">⚠ MAIS LIMITADO</span>
+          </div>
+          <div class="con-spec-row"><span class="cnsl">GPU</span><span class="cnsv">4 TF RDNA 2 — 20 CUs<small>vs 12 TF do Series X — 3× menos potente</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">RAM</span><span class="cnsv">10 GB GDDR6<small>só 8 GB disponíveis para jogos</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">RESOLUÇÃO</span><span class="cnsv" style="color:var(--red)">~720p nativo → 1080p upscaled</span></div>
+          <div class="con-spec-row"><span class="cnsl">FPS ALVO</span><span class="cnsv" style="color:var(--red)">30 FPS — modo único</span></div>
+          <div class="con-spec-row"><span class="cnsl">RAY TRACING</span><span class="cnsv" style="color:var(--red)">❌ Ausente</span></div>
+          <div class="con-spec-row"><span class="cnsl">CONTROLE</span><span class="cnsv" style="color:var(--dim)">Sem haptic feedback</span></div>
+          <div class="con-pills-row">
+            <span class="con-pill-new" style="color:var(--red);border-color:rgba(255,49,49,.3)">30 FPS</span>
+            <span class="con-pill-new" style="color:#6cb4f7;border-color:rgba(108,180,247,.3)">1080p UPSCALED</span>
+            <span class="con-pill-new" style="color:var(--red);border-color:rgba(255,49,49,.3)">SEM RT</span>
+          </div>
+          <div class="con-verdict-box" style="background:rgba(255,49,49,.05);border-left:3px solid var(--red);">
+            <strong style="color:var(--red)">⚠ LIMITAÇÕES</strong>
+            GPU de 4 TF incapaz de rodar RT com a densidade do RAGE 9. Texturas reduzidas, NPCs menos densos, pop-in visível. A versão mais fraca de todas as plataformas — vai rodar, mas vai decepcionar.
+          </div>
+        </div>
+      </div>
+
+      <div class="con-panel-new" id="cpanel-sx">
+        <img class="con-panel-img" src="https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=700&q=85&fit=crop" alt="Xbox Series X" onerror="this.style.display='none'">
+        <div class="con-panel-body">
+          <div class="con-panel-top">
+            <div><div style="font-family:'Share Tech Mono';font-size:.5rem;letter-spacing:.2em;color:var(--dim);">XBOX</div><div class="con-panel-name" style="color:var(--blue)">Series X</div></div>
+            <span class="con-panel-tag" style="color:var(--yellow);border-color:rgba(255,224,51,.35);background:rgba(255,224,51,.07)">⚡ BOA ESCOLHA</span>
+          </div>
+          <div class="con-spec-row"><span class="cnsl">GPU</span><span class="cnsv">12 TF RDNA 2 — 52 CUs<small>mesma geração que PS5, ligeiramente mais potente</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">RAM</span><span class="cnsv">16 GB GDDR6</span></div>
+          <div class="con-spec-row"><span class="cnsl">QUALITY MODE</span><span class="cnsv" style="color:var(--yellow)">30 FPS / 4K upscaled<small>RT básico ativo</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">PERF. MODE</span><span class="cnsv" style="color:var(--blue)">~60 FPS / 1440p<small>sem confirmação oficial</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">RAY TRACING</span><span class="cnsv" style="color:var(--yellow)">⚡ Básico / Limitado</span></div>
+          <div class="con-spec-row"><span class="cnsl">CONTROLE</span><span class="cnsv" style="color:var(--dim)">Sem haptic feedback</span></div>
+          <div class="con-pills-row">
+            <span class="con-pill-new" style="color:var(--yellow);border-color:rgba(255,224,51,.3)">QUALITY 30FPS</span>
+            <span class="con-pill-new" style="color:var(--blue);border-color:rgba(0,168,255,.3)">PERF. ~60FPS</span>
+            <span class="con-pill-new" style="color:var(--yellow);border-color:rgba(255,224,51,.3)">RT BÁSICO</span>
+          </div>
+          <div class="con-verdict-box" style="background:rgba(255,224,51,.04);border-left:3px solid var(--yellow);">
+            <strong style="color:var(--yellow)">⚡ ATENÇÃO</strong>
+            Sem DualSense haptics. Modo 60fps não confirmado oficialmente. Boa opção para quem está no ecossistema Xbox com Game Pass. GPU ligeiramente maior pode dar FPS mais estável em cenas densas vs PS5.
+          </div>
+        </div>
+      </div>
+
+      <div class="con-panel-new" id="cpanel-ps5">
+        <img class="con-panel-img" src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=700&q=85&fit=crop" alt="PS5" onerror="this.style.display='none'">
+        <div class="con-panel-body">
+          <div class="con-panel-top">
+            <div><div style="font-family:'Share Tech Mono';font-size:.5rem;letter-spacing:.2em;color:var(--dim);">PLAYSTATION</div><div class="con-panel-name" style="color:#4f8fff">PS5</div></div>
+            <span class="con-panel-tag" style="color:var(--green);border-color:rgba(57,255,20,.35);background:rgba(57,255,20,.07)">✅ RECOMENDADO</span>
+          </div>
+          <div class="con-spec-row"><span class="cnsl">GPU</span><span class="cnsv">10.28 TF RDNA 2 — 36 CUs<small>SSD 5.5 GB/s — mais rápido que Series X</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">RAM</span><span class="cnsv">16 GB GDDR6 — 448 GB/s</span></div>
+          <div class="con-spec-row"><span class="cnsl">QUALITY MODE</span><span class="cnsv" style="color:#4f8fff">30 FPS / 4K<small>RT parcial ativo</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">PERF. MODE</span><span class="cnsv" style="color:#4f8fff">~60 FPS / 1440p<small>via leak europeu</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">DUALSENSE</span><span class="cnsv" style="color:var(--green)">✅ Haptic feedback exclusivo</span></div>
+          <div class="con-spec-row"><span class="cnsl">RAY TRACING</span><span class="cnsv" style="color:var(--yellow)">⚡ Parcial</span></div>
+          <div class="con-pills-row">
+            <span class="con-pill-new" style="color:#4f8fff;border-color:rgba(79,143,255,.3)">QUALITY 30FPS</span>
+            <span class="con-pill-new" style="color:#4f8fff;border-color:rgba(79,143,255,.3)">PERF. ~60FPS</span>
+            <span class="con-pill-new" style="color:var(--green);border-color:rgba(57,255,20,.3)">HAPTICS</span>
+          </div>
+          <div class="con-verdict-box" style="background:rgba(57,255,20,.04);border-left:3px solid var(--green);">
+            <strong style="color:var(--green)">✅ VANTAGENS EXCLUSIVAS</strong>
+            DualSense com haptic feedback real — areia, chuva e colisões no controle. SSD 5.5 GB/s mais suave que o Series X. Parceria oficial com Sony. Melhor custo-benefício para o GTA VI.
+          </div>
+        </div>
+      </div>
+
+      <div class="con-panel-new" id="cpanel-pro">
+        <img class="con-panel-img" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=700&q=85&fit=crop" alt="PS5 Pro" onerror="this.style.display='none'">
+        <div class="con-panel-body">
+          <div class="con-panel-top">
+            <div><div style="font-family:'Share Tech Mono';font-size:.5rem;letter-spacing:.2em;color:var(--dim);">PLAYSTATION</div><div class="con-panel-name" style="color:var(--cyan);text-shadow:0 0 14px rgba(0,245,255,.35)">PS5 PRO</div></div>
+            <span class="con-panel-tag" style="color:var(--cyan);border-color:rgba(0,245,255,.4);background:rgba(0,245,255,.1)">👑 MELHOR EXP.</span>
+          </div>
+          <div class="con-spec-row"><span class="cnsl">GPU</span><span class="cnsv" style="color:var(--cyan)">16.7 TF RDNA 3.5 — 60 CUs<small>+45% vs PS5 · 2× mais RT cores</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">RAM</span><span class="cnsv">16 GB GDDR6 — 576 GB/s<small>+28% bandwidth vs PS5</small></span></div>
+          <div class="con-spec-row"><span class="cnsl">PSSR AI</span><span class="cnsv" style="color:var(--cyan)">✅ Neural upscaling exclusivo Sony</span></div>
+          <div class="con-spec-row"><span class="cnsl">RESOLUÇÃO</span><span class="cnsv" style="color:var(--cyan)">4K via PSSR — cristalino</span></div>
+          <div class="con-spec-row"><span class="cnsl">FPS ALVO</span><span class="cnsv" style="color:var(--cyan)">60 FPS estável</span></div>
+          <div class="con-spec-row"><span class="cnsl">RAY TRACING</span><span class="cnsv" style="color:var(--cyan)">✅ RT Completo</span></div>
+          <div class="con-spec-row"><span class="cnsl">PS5 PRO ENH.</span><span class="cnsv" style="color:var(--green)">✅ Selo oficial confirmado</span></div>
+          <div class="con-pills-row">
+            <span class="con-pill-new" style="color:var(--cyan);border-color:rgba(0,245,255,.35)">60FPS ESTÁVEL</span>
+            <span class="con-pill-new" style="color:var(--cyan);border-color:rgba(0,245,255,.35)">4K PSSR</span>
+            <span class="con-pill-new" style="color:var(--cyan);border-color:rgba(0,245,255,.35)">RT COMPLETO</span>
+            <span class="con-pill-new" style="color:var(--green);border-color:rgba(57,255,20,.3)">PRO ENHANCED</span>
+          </div>
+          <div class="con-verdict-box" style="background:rgba(0,245,255,.04);border-left:3px solid var(--cyan);">
+            <strong style="color:var(--cyan)">👑 A MELHOR EXPERIÊNCIA</strong>
+            PSSR neural entrega 4K sem custo de desempenho. 2× mais RT cores = sombras e reflexos completos. PS5 Pro Enhanced confirmado. A experiência definitiva no lançamento de GTA VI.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+<!-- RUMORES -->
+<div id="rumores">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-label">// o que sabemos até agora</span>
+    <h2 class="sec-title">RUMORES <span class="ac">CONFIRMADOS</span> <span class="ap">E NÃO</span></h2>
+    <p class="sec-desc">Tudo que vazou, confirmou ou ainda é incerto sobre o GTA VI — atualizado com as últimas informações.</p>
+  </div>
+  <div class="rumor-grid">
+    <div class="rumor-item fade"><div class="rumor-icon">🗓</div><div><div class="rumor-t">Lançamento 19/11/2026</div><div class="rumor-d">Confirmado oficialmente pela Rockstar e Take-Two. PS5 e Xbox Series X|S.</div><div class="rtag r-yes">✅ CONFIRMADO</div></div></div>
+    <div class="rumor-item fade"><div class="rumor-icon">🎮</div><div><div class="rumor-t">PS5 Pro Enhanced</div><div class="rumor-d">Selo oficial apareceu na PlayStation Store antes do previsto, confirmando PSSR e RT aprimorado.</div><div class="rtag r-yes">✅ CONFIRMADO</div></div></div>
+    <div class="rumor-item fade"><div class="rumor-icon">🕹</div><div><div class="rumor-t">DualSense Haptics Exclusivos</div><div class="rumor-d">Sony confirmou parceria com Rockstar. Feedback físico de areia, chuva, colisões no controle.</div><div class="rtag r-yes">✅ CONFIRMADO</div></div></div>
+    <div class="rumor-item fade"><div class="rumor-icon">💰</div><div><div class="rumor-t">Preço ~R$ 350 no Brasil</div><div class="rumor-d">Pré-venda aberta na PlayStation Store Brasil por R$349,90. Edições especiais a partir de R$449,90.</div><div class="rtag r-yes">✅ CONFIRMADO</div></div></div>
+    <div class="rumor-item fade"><div class="rumor-icon">💻</div><div><div class="rumor-t">Versão PC em 2027</div><div class="rumor-d">Rockstar não anunciou PC. Padrão histórico da empresa sugere PC 12–18 meses após consoles.</div><div class="rtag r-maybe">❓ PROVÁVEL</div></div></div>
+    <div class="rumor-item fade"><div class="rumor-icon">⚡</div><div><div class="rumor-t">Modo 60fps no PS5 base</div><div class="rumor-d">Leak de varejista europeu mostrou descrição com modo Performance 60fps. Não confirmado oficialmente.</div><div class="rtag r-maybe">❓ PROVÁVEL</div></div></div>
+    <div class="rumor-item fade"><div class="rumor-icon">🌐</div><div><div class="rumor-t">GTA Online 2 Vice City</div><div class="rumor-d">Rockstar confirmou modo online. Leaks sugerem Vice City Online com missões cooperativas expandidas.</div><div class="rtag r-maybe">❓ PARCIAL</div></div></div>
+    <div class="rumor-item fade"><div class="rumor-icon">🔧</div><div><div class="rumor-t">Ray Tracing no Xbox Series S</div><div class="rumor-d">GPU de 4 TF do Series S é incapaz de rodar RT em tempo real com a densidade de cena do GTA VI.</div><div class="rtag r-no">❌ IMPROVÁVEL</div></div></div>
+    <div class="rumor-item fade"><div class="rumor-icon">📱</div><div><div class="rumor-t">Versão Mobile</div><div class="rumor-d">Nenhuma indicação. GTA VI desenvolvido exclusivamente para plataformas nova geração.</div><div class="rtag r-no">❌ NÃO CONFIRMADO</div></div></div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+<!-- VEREDICTO -->
+<div style="padding:75px 24px;max-width:1060px;margin:0 auto;">
+  <span class="sec-label">// ranking final · by robzeraw</span>
+  <h2 class="sec-title">VEREDICTO <span class="ac">FINAL</span></h2>
+  <p class="sec-desc">Qual plataforma você deveria escolher para estrear em Vice City no dia 19/11/2026?</p>
+  <table class="vtable fade">
+    <thead><tr><th>#</th><th>Plataforma</th><th>FPS Alvo</th><th>Resolução</th><th>Ray Tracing</th><th>Nota</th></tr></thead>
+    <tbody>
+      <tr><td><div class="vrank" style="color:var(--cyan)">1</div></td><td><div class="vname" style="color:var(--cyan)">PS5 Pro</div><div class="vnote">A máquina definitiva para GTA VI no lançamento</div></td><td style="color:var(--cyan);font-weight:700">60fps PSSR</td><td style="color:var(--cyan)">4K</td><td style="color:var(--green)">✅ COMPLETO</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td><div class="vrank" style="color:#4f8fff">2</div></td><td><div class="vname" style="color:#4f8fff">PS5</div><div class="vnote">DualSense haptics + 2 modos confirmados</div></td><td style="color:var(--yellow);font-weight:700">30–60fps</td><td>~1440p→4K</td><td style="color:var(--yellow)">⚡ PARCIAL</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td><div class="vrank" style="color:var(--blue)">3</div></td><td><div class="vname" style="color:var(--blue)">Xbox Series X</div><div class="vnote">GPU poderosa, sem haptics, sem PS5 Pro Enhanced</div></td><td style="color:var(--yellow);font-weight:700">30–60fps</td><td>~1440p→4K</td><td style="color:var(--yellow)">⚡ BÁSICO</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td><div class="vrank" style="color:#6cb4f7">4</div></td><td><div class="vname" style="color:#6cb4f7">Xbox Series S</div><div class="vnote">Funcional, mas muito inferior — evite se possível</div></td><td style="color:var(--red);font-weight:700">30fps fixo</td><td>720p→1080p</td><td style="color:var(--red)">❌ AUSENTE</td><td>⭐⭐</td></tr>
+      <tr><td><div class="vrank" style="color:var(--green)">?</div></td><td><div class="vname" style="color:var(--green)">PC — 2027+</div><div class="vnote">Versão definitiva — mas espere os specs oficiais</div></td><td style="color:var(--green);font-weight:700">Ilimitado</td><td>4K – 8K</td><td style="color:var(--green)">✅ PATH TRACE</td><td>🔒 2027</td></tr>
+    </tbody>
+  </table>
+  <div class="note-box fade" style="margin-top:22px">
+    <strong>📢 RESUMO — ROBZERAW:</strong> PS5 Pro é o topo absoluto. PS5 base é excelente custo-benefício com haptics únicos. Xbox Series X entrega performance similar. Series S vai rodar, mas vai decepcionar visualmente. PC em 2027 será a versão mais linda que já existiu em gaming.
+  </div>
+</div>
+
+<div class="divider"></div>
+<!-- QUIZ -->
+<div id="quiz">
+<div class="quiz-section">
+  <div class="sec-head">
+    <span class="sec-label">// encontre sua plataforma ideal</span>
+    <h2 class="sec-title">QUIZ — <span class="ap">QUAL É A SUA?</span></h2>
+    <p class="sec-desc">5 perguntas rápidas — o quiz analisa seu perfil e indica a melhor plataforma para você estrear em Vice City.</p>
+  </div>
+  <div class="quiz-box fade">
+    <div class="quiz-prog" id="quiz-prog">
+      <div class="qp-pip now" id="qpip-0"></div>
+      <div class="qp-pip" id="qpip-1"></div>
+      <div class="qp-pip" id="qpip-2"></div>
+      <div class="qp-pip" id="qpip-3"></div>
+      <div class="qp-pip" id="qpip-4"></div>
+    </div>
+
+    <div class="quiz-step active" id="qs-0">
+      <div class="quiz-num">PERGUNTA 1 DE 5</div>
+      <div class="quiz-q">Qual é o seu orçamento total para jogar GTA VI?</div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="qAns(0,0)">💸 Até R$3.000 — quero o mais barato</div>
+        <div class="quiz-opt" onclick="qAns(0,1)">💰 R$3.000 a R$5.000 — custo-benefício</div>
+        <div class="quiz-opt" onclick="qAns(0,2)">💎 R$5.000 a R$8.000 — quero qualidade</div>
+        <div class="quiz-opt" onclick="qAns(0,3)">👑 Acima de R$8.000 — quero o melhor</div>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="qs-1">
+      <div class="quiz-num">PERGUNTA 2 DE 5</div>
+      <div class="quiz-q">Você já tem algum console ou PC gamer?</div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="qAns(1,0)">❌ Não tenho nada ainda — começo do zero</div>
+        <div class="quiz-opt" onclick="qAns(1,1)">🎮 Tenho PS5 (base ou Slim)</div>
+        <div class="quiz-opt" onclick="qAns(1,2)">🟢 Tenho Xbox Series X ou S</div>
+        <div class="quiz-opt" onclick="qAns(1,3)">🖥️ Tenho PC gamer</div>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="qs-2">
+      <div class="quiz-num">PERGUNTA 3 DE 5</div>
+      <div class="quiz-q">O que mais importa pra você numa experiência de jogo?</div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="qAns(2,0)">🖼️ Melhor imagem — 4K, ray tracing completo</div>
+        <div class="quiz-opt" onclick="qAns(2,1)">🎮 Controle com vibração e feedback físico</div>
+        <div class="quiz-opt" onclick="qAns(2,2)">⚡ FPS alto e fluido — 60fps estável</div>
+        <div class="quiz-opt" onclick="qAns(2,3)">💰 Só jogar bem sem gastar demais</div>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="qs-3">
+      <div class="quiz-num">PERGUNTA 4 DE 5</div>
+      <div class="quiz-q">Você tem TV 4K ou monitor 4K?</div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="qAns(3,0)">✅ Sim, tenho 4K e quero aproveitar</div>
+        <div class="quiz-opt" onclick="qAns(3,1)">📺 Tenho Full HD 1080p — tá ótimo pra mim</div>
+        <div class="quiz-opt" onclick="qAns(3,2)">🛒 Vou comprar TV nova junto com o console</div>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="qs-4">
+      <div class="quiz-num">PERGUNTA 5 DE 5</div>
+      <div class="quiz-q">Você quer jogar no lançamento — dia 19/11/2026?</div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="qAns(4,0)">🚀 SIM — quero no dia do lançamento!</div>
+        <div class="quiz-opt" onclick="qAns(4,1)">⏳ Posso esperar algumas semanas</div>
+        <div class="quiz-opt" onclick="qAns(4,2)">💻 Vou esperar a versão PC em 2027</div>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="qs-result">
+      <div class="quiz-result-wrap">
+        <span class="qr-emoji" id="qr-emoji">🎮</span>
+        <div class="qr-title" id="qr-title" style="color:var(--cyan)">PS5 PRO</div>
+        <p class="qr-desc" id="qr-desc">Com base nas suas respostas, esta é a melhor plataforma para você.</p>
+        <button class="quiz-restart-btn" onclick="restartQuiz()">↩ REFAZER O QUIZ</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+<!-- VOTAÇÃO -->
+<div class="vote-section">
+  <div class="sec-head">
+    <span class="sec-label">// vote na comunidade</span>
+    <h2 class="sec-title">EM QUAL PLATAFORMA <span class="ap">VOCÊ VAI JOGAR?</span></h2>
+    <p class="sec-desc">Vote e veja o resultado da comunidade Robzeraw em tempo real.</p>
+  </div>
+  <div class="vote-box fade">
+    <div class="vote-item">
+      <button class="vote-btn" id="vbtn-0" onclick="doVote(0)">👑 PS5 PRO</button>
+      <div class="vbar-track"><div class="vbar-fill" id="vbar-0" style="background:var(--cyan)"></div></div>
+      <span class="vpct" id="vpct-0" style="color:var(--cyan)">0%</span>
+    </div>
+    <div class="vote-item">
+      <button class="vote-btn" id="vbtn-1" onclick="doVote(1)">🎮 PS5</button>
+      <div class="vbar-track"><div class="vbar-fill" id="vbar-1" style="background:#4f8fff"></div></div>
+      <span class="vpct" id="vpct-1" style="color:#4f8fff">0%</span>
+    </div>
+    <div class="vote-item">
+      <button class="vote-btn" id="vbtn-2" onclick="doVote(2)">🟢 XBOX SERIES X</button>
+      <div class="vbar-track"><div class="vbar-fill" id="vbar-2" style="background:var(--blue)"></div></div>
+      <span class="vpct" id="vpct-2" style="color:var(--blue)">0%</span>
+    </div>
+    <div class="vote-item">
+      <button class="vote-btn" id="vbtn-3" onclick="doVote(3)">🔵 XBOX SERIES S</button>
+      <div class="vbar-track"><div class="vbar-fill" id="vbar-3" style="background:#6cb4f7"></div></div>
+      <span class="vpct" id="vpct-3" style="color:#6cb4f7">0%</span>
+    </div>
+    <div class="vote-item">
+      <button class="vote-btn" id="vbtn-4" onclick="doVote(4)">🖥️ PC (2027)</button>
+      <div class="vbar-track"><div class="vbar-fill" id="vbar-4" style="background:var(--green)"></div></div>
+      <span class="vpct" id="vpct-4" style="color:var(--green)">0%</span>
+    </div>
+    <div class="vote-item">
+      <button class="vote-btn" id="vbtn-5" onclick="doVote(5)">🤔 AINDA NÃO SEI</button>
+      <div class="vbar-track"><div class="vbar-fill" id="vbar-5" style="background:var(--dim)"></div></div>
+      <span class="vpct" id="vpct-5" style="color:var(--dim)">0%</span>
+    </div>
+    <div class="vote-total-lbl" id="vote-total">0 votos — seja o primeiro!</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<!-- PLAYLIST -->
+<div id="videos" class="playlist-section">
+<div class="playlist-inner">
+  <div class="sec-head">
+    <span class="sec-label">// conteúdo do canal</span>
+    <h2 class="sec-title">VÍDEOS <span class="ap">GTA VI</span> — <span class="ac">ROBZERAW</span></h2>
+    <p class="sec-desc">Toda a cobertura do GTA VI — análises, hardware, opinião e guias. Clique para assistir.</p>
+  </div>
+  <div class="playlist-player fade">
+    <iframe
+      src="https://www.youtube.com/embed/videoseries?list=PLXWFzVS6EiOLRzju9vht30xuwtcC9J_iJ&rel=0&modestbranding=1"
+      title="GTA VI — Playlist Robzeraw"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="playlist-links">
+    <a class="pl-link pl-link-yt" href="https://www.youtube.com/playlist?list=PLXWFzVS6EiOLRzju9vht30xuwtcC9J_iJ" target="_blank">▶ ABRIR PLAYLIST COMPLETA NO YOUTUBE</a>
+    <a class="pl-link pl-link-sub" href="https://youtube.com/@robzeraw?sub_confirmation=1" target="_blank">🔔 INSCREVER-SE NO CANAL</a>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+<!-- FAQ -->
+<div id="faq">
+<div class="section-sm">
+  <span class="sec-label">// dúvidas frequentes dos fãs</span>
+  <h2 class="sec-title"><span class="ac">FAQ</span> — SUAS PERGUNTAS</h2>
+  <p class="sec-desc">As perguntas que mais chegam nos comentários do canal — respondidas com base nas infos disponíveis.</p>
+  <div class="faq">
+    <div class="faq-item fade"><div class="faq-q" onclick="faqToggle(this)">GTA VI vai rodar no PS4 ou Xbox One?<span class="faq-toggle">+</span></div><div class="faq-a">Não. GTA VI foi desenvolvido exclusivamente para PlayStation 5 e Xbox Series X|S. Plataformas da geração anterior são tecnicamente inviáveis dado o nível de exigência do RAGE 9.</div></div>
+    <div class="faq-item fade"><div class="faq-q" onclick="faqToggle(this)">GTA VI vai ter versão PC no lançamento?<span class="faq-toggle">+</span></div><div class="faq-a">Não. A Rockstar confirmou apenas PS5 e Xbox Series X|S para 19/11/2026. Com base no histórico da empresa (GTA V saiu em consoles em 2013 e chegou no PC em 2015), a estimativa é que a versão PC chegue em 2027 — possivelmente Q2 ou Q3.</div></div>
+    <div class="faq-item fade"><div class="faq-q" onclick="faqToggle(this)">Vale a pena comprar PS5 Pro só pra jogar GTA VI?<span class="faq-toggle">+</span></div><div class="faq-a">Depende do seu orçamento. O PS5 Pro custa ~R$3.000–3.800 a mais que o PS5 base. Se você quer a melhor experiência possível com 4K PSSR + RT completo + 60fps, vale. Se estiver no limite do orçamento, o PS5 base entrega uma experiência excelente também com haptics do DualSense.</div></div>
+    <div class="faq-item fade"><div class="faq-q" onclick="faqToggle(this)">Meu PC com RTX 3060 vai rodar GTA VI?<span class="faq-toggle">+</span></div><div class="faq-a">Sim, mas você precisará esperar a versão PC (2027) e usar DLSS obrigatoriamente. A RTX 3060 12GB está no tier Recomendado — espere 45–60 FPS em 1080p com qualidade média/alta. Com DLSS Quality você chega próximo de 60fps estáveis. Evite configurações Ultra.</div></div>
+    <div class="faq-item fade"><div class="faq-q" onclick="faqToggle(this)">Precisa de SSD para jogar GTA VI no PC?<span class="faq-toggle">+</span></div><div class="faq-a">Sim, NVMe SSD é obrigatório. O RAGE 9 usa streaming de assets em tempo real que exige alta velocidade de leitura — espera-se mínimo de 2.500 MB/s (PCIe 3.0 NVMe). HDD é incompatível e causará pop-in severo ou travamentos.</div></div>
+    <div class="faq-item fade"><div class="faq-q" onclick="faqToggle(this)">Xbox Series S vai ter modo 60fps no GTA VI?<span class="faq-toggle">+</span></div><div class="faq-a">Muito improvável. A GPU do Series S tem apenas 4 TF versus os 12 TF do Series X. Com 720p nativo sendo necessário para atingir 30fps estáveis, um modo Performance 60fps exigiria reduzir ainda mais tudo, tornando a experiência ainda mais inferior.</div></div>
+    <div class="faq-item fade"><div class="faq-q" onclick="faqToggle(this)">GTA VI vai ter ray tracing no PS5 base?<span class="faq-toggle">+</span></div><div class="faq-a">Sim, mas parcial. Com base nos leaks, o modo Quality do PS5 base terá ray tracing para iluminação global, sombras e reflexos em superfícies específicas — não será RT completo como no PS5 Pro.</div></div>
+    <div class="faq-item fade"><div class="faq-q" onclick="faqToggle(this)">Quando vai sair a versão PC com requisitos oficiais?<span class="faq-toggle">+</span></div><div class="faq-a">Ainda não há data. A Rockstar costuma anunciar requisitos de PC alguns meses antes do lançamento. Estimativa: requisitos oficiais em Q1–Q2 de 2027, com lançamento Q2–Q3 2027. Acompanhe o canal Robzeraw para updates assim que saírem!</div></div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="divider"></div>
+
+<!-- ALERTA -->
+<div class="alert-section">
+  <div class="alert-box fade">
+    <div class="alert-icon-big">🔔</div>
+    <div class="alert-content">
+      <div class="alert-title">ATIVE AS NOTIFICAÇÕES</div>
+      <div class="alert-desc">Quando saírem os requisitos oficiais de PC, novos trailers ou qualquer novidade do GTA VI, você será o primeiro a saber. Entre na comunidade e ative o sininho!</div>
+      <div class="alert-links">
+        <a class="al-link al-dc" href="https://discord.gg/nzMvd9WHpN" target="_blank">💬 DISCORD — COMUNIDADE ROBZERAW</a>
+        <a class="al-link al-yt" href="https://youtube.com/@robzeraw" target="_blank">▶ YOUTUBE — ATIVAR NOTIFICAÇÕES 🔔</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- CANAL -->
+<div id="canal">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-label">// conteúdo de games · brasil</span>
+    <h2 class="sec-title">CANAL <span class="ap">ROBZERAW</span></h2>
+    <p class="sec-desc">Siga o canal para análises de GTA VI, hardware, gameplay e guias assim que o jogo chegar.</p>
+  </div>
+  <div class="canal-box fade">
+    <div class="canal-cards">
+      <a class="canal-card" href="https://youtube.com/@robzeraw" target="_blank">
+        <div class="canal-icon">▶️</div>
+        <div>
+          <div class="canal-plat">YouTube</div>
+          <div class="canal-name" style="color:#ff4040">ROBZERAW</div>
+          <div class="canal-desc">Análises de hardware, gameplay, guias de configuração e conteúdo de GTA VI assim que o jogo chegar. Forza Horizon, GTA e muito mais.</div>
+          <div class="canal-btn btn-yt">▶ ACESSAR CANAL</div>
+        </div>
+      </a>
+      <a class="canal-card" href="https://tiktok.com/@robzeraw" target="_blank">
+        <div class="canal-icon">📱</div>
+        <div>
+          <div class="canal-plat">TikTok</div>
+          <div class="canal-name" style="color:#00f2ea">ROBZERAW</div>
+          <div class="canal-desc">Clips curtos, reações, news rápidas e os melhores momentos do GTA VI em formato vertical. Siga pra não perder nada do lançamento.</div>
+          <div class="canal-btn btn-tt">♪ SEGUIR NO TIKTOK</div>
+        </div>
+      </a>
+    </div>
+    <div class="discord-bar">
+      <div class="dc-left">
+        <div class="dc-icon">💬</div>
+        <div>
+          <div class="dc-title">COMUNIDADE ROBZERAW</div>
+          <div class="dc-sub">Entre no Discord — discuta GTA VI, hardware, troque dicas e fique por dentro antes de todo mundo.</div>
+        </div>
+      </div>
+      <a class="dc-btn" href="https://discord.gg/nzMvd9WHpN" target="_blank">ENTRAR NO DISCORD</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">GTA VI</div>
+  <div style="font-family:'Bebas Neue';font-size:1.3rem;letter-spacing:.18em;color:var(--txt);margin-top:6px;">ROBZERAW</div>
+  <div style="font-family:'Share Tech Mono';font-size:.54rem;letter-spacing:.18em;color:var(--dim);margin:8px 0 14px">CONTEÚDO DE GAMES · BRASIL 🇧🇷</div>
+  <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+    <a href="https://youtube.com/@robzeraw" target="_blank" style="font-family:'Share Tech Mono';font-size:.56rem;letter-spacing:.12em;padding:5px 13px;border-radius:2px;border:1px solid rgba(255,64,64,.35);color:#ff4040;background:rgba(255,64,64,.07);">▶ YOUTUBE</a>
+    <a href="https://tiktok.com/@robzeraw" target="_blank" style="font-family:'Share Tech Mono';font-size:.56rem;letter-spacing:.12em;padding:5px 13px;border-radius:2px;border:1px solid rgba(0,242,234,.3);color:#00f2ea;background:rgba(0,242,234,.06);">♪ TIKTOK</a>
+    <a href="https://discord.gg/nzMvd9WHpN" target="_blank" style="font-family:'Share Tech Mono';font-size:.56rem;letter-spacing:.12em;padding:5px 13px;border-radius:2px;border:1px solid rgba(114,137,218,.3);color:#7289da;background:rgba(114,137,218,.07);">💬 DISCORD</a>
+  </div>
+  <div class="footer-text">
+    GUIA DE HARDWARE GTA VI — VICE CITY READY? — 2026 · BY ROBZERAW<br>
+    ⚠ Requisitos de PC são previsões baseadas em leaks — não confirmados pela Rockstar Games<br>
+    Informações de console via leaks de varejos europeus, Digital Foundry e PlayStation Store<br>
+    GTA VI © 2026 Rockstar Games / Take-Two Interactive · Conteúdo independente de fã
+  </div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div id="video-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:20px;">
+  <button onclick="closeVideoModal()" style="position:absolute;top:20px;right:24px;font-family:'Bebas Neue';font-size:2.2rem;color:#fff;background:none;border:none;cursor:pointer;opacity:.6;transition:opacity .2s;line-height:1;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.6">✕</button>
+  <div id="video-modal-title" style="font-family:'Bebas Neue';font-size:1.1rem;letter-spacing:.15em;color:rgba(255,255,255,.4);text-align:center;text-transform:uppercase;"></div>
+  <div style="width:100%;max-width:900px;aspect-ratio:16/9;position:relative;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.1);">
+    <iframe id="video-modal-frame" width="100%" height="100%" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;display:block;background:#000;"></iframe>
+  </div>
+  <a id="video-modal-ytlink" href="#" target="_blank"
+    style="font-family:'Share Tech Mono';font-size:.6rem;letter-spacing:.14em;padding:8px 18px;border:1px solid rgba(255,64,64,.4);color:#ff4040;border-radius:3px;background:rgba(255,64,64,.08);">
+    ▶ ABRIR NO YOUTUBE
+  </a>
+</div>
+
+<script>
+// ══ THEME ══
+function toggleTheme(){
+  const h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme',dark?'light':'dark');
+  const btn=document.getElementById('theme-toggle');
+  if(btn)btn.textContent=dark?'☀️':'🌙';
+}
+
+// ══ PARTICLES ══
+(function(){
+  const c=document.getElementById('particles');if(!c)return;
+  const ctx=c.getContext('2d');
+  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  const pts=Array.from({length:60},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.4+0.3,vx:(Math.random()-.5)*.2,vy:-(Math.random()*.28+.06),a:Math.random()*.5+.1,col:Math.random()>.5?'0,245,255':'255,0,110'}));
+  function draw(){ctx.clearRect(0,0,c.width,c.height);pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x*c.width,p.y*c.height,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.col},${p.a})`;ctx.fill();p.x+=p.vx/c.width;p.y+=p.vy/c.height;p.a-=.0007;if(p.y<0||p.a<=0){p.y=1;p.x=Math.random();p.a=Math.random()*.5+.1;}});requestAnimationFrame(draw);}
+  draw();
+})();
+
+// ══ COUNTDOWN ══
+function updateCountdown(){
+  const diff=new Date('2026-11-19T00:00:00')-new Date();if(diff<=0)return;
+  const set=(id,v,p)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(p,'0');};
+  set('cd-d',Math.floor(diff/86400000),3);
+  set('cd-h',Math.floor(diff%86400000/3600000),2);
+  set('cd-m',Math.floor(diff%3600000/60000),2);
+  set('cd-s',Math.floor(diff%60000/1000),2);
+}
+updateCountdown();setInterval(updateCountdown,1000);
+
+// ══ VIDEO MODAL (trailers) ══
+function openVideoModal(ytId,title){
+  const modal=document.getElementById('video-modal');
+  const frame=document.getElementById('vm-frame');
+  const ttl=document.getElementById('vm-title');
+  const lnk=document.getElementById('vm-ytlink');
+  if(!modal||!frame)return;
+  frame.src='https://www.youtube.com/embed/'+ytId+'?autoplay=1&rel=0&modestbranding=1';
+  if(ttl)ttl.textContent=title||'';
+  if(lnk)lnk.href='https://www.youtube.com/watch?v='+ytId;
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeVideoModal(){
+  const modal=document.getElementById('video-modal');
+  const frame=document.getElementById('vm-frame');
+  if(modal)modal.classList.remove('open');
+  if(frame)frame.src='';
+  document.body.style.overflow='';
+}
+
+// ══ TIMELINE ANIMATION ══
+(function(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('tl-vis'),i*80);obs.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.tl-item').forEach(el=>obs.observe(el));
+})();
+
+// ══ PC SIDE-BY-SIDE PANELS ══
+function showPcPanel(n){
+  for(let i=1;i<=4;i++){
+    const tab=document.getElementById('pctab-'+i);
+    const panel=document.getElementById('pcpanel-'+i);
+    if(tab)tab.classList.toggle('active',i===n);
+    if(panel)panel.classList.toggle('active',i===n);
+  }
+}
+
+// ══ GPU ACCORDION ══
+function toggleGpuAcc(){
+  const acc=document.getElementById('gpu-acc');
+  if(acc)acc.classList.toggle('open');
+}
+
+// ══ CALCULATOR ══
+const FPS_DATA=[[20,30],[25,35],[36,49],[47,63],[58,77],[38,52],[52,68],[65,88],[82,106],[110,140],[138,170],[12,18],[16,22],[23,32],[30,42],[38,52],[24,34],[34,46],[42,58],[54,72],[72,95],[90,118],[7,11],[10,14],[14,20],[18,26],[24,32],[15,22],[21,29],[27,37],[35,47],[46,62],[58,76],[4,7],[6,9],[8,13],[11,16],[14,20],[9,13],[12,17],[16,22],[21,29],[28,38],[35,47]];
+const CPU_M=[0.82,0.88,0.93,0.90,1.0,1.05,0.85,0.94,0.97,1.03,1.04,1.06];
+const CPU_N=['Gargalo severo de CPU','CPU ok — pode limitar GPUs top','Bom — pouco gargalo','Sem bottleneck significativo','Ótimo para GTA VI','Top — zero gargalo','Ryzen 3600 — ok midrange','5600X — excelente C/B','5800X — muito bom','★ 5800X3D — melhor gaming C/B','7800X3D — excelente cache','★★ CPU definitivo GTA VI'];
+const RAM_M=[0.70,0.84,1.0,1.03,1.04];
+const RAM_N=['8 GB — INSUFICIENTE ⚠ Faça upgrade','12 GB — no limite mínimo','16 GB — ideal para GTA VI','32 GB — confortável, zero preocupação','64 GB — além do necessário'];
+const RAM_C=['var(--red)','var(--yellow)','var(--green)','var(--cyan)','var(--cyan)'];
+const UP=['DLSS','DLSS','DLSS','DLSS','DLSS','DLSS','DLSS','DLSS 3 FG','DLSS 3 FG','DLSS 3 FG','DLSS 3 FG'];
+const QUAL=[['Baixa','Muito Baixa','Inviável','Inviável'],['Baixa','Mínima','Não indicado','Inviável'],['Média/Alta','Média','Baixa','Não indicado'],['Alta','Média/Alta','Média','Não indicado'],['Ultra','Alta','Média/Alta','Média'],['Média/Alta','Média','Baixa','Não indicado'],['Alta/Ultra','Alta','Média','Baixa'],['Ultra+RT','Alta/Ultra','Alta','Média'],['Ultra+RT','Ultra','Alta/Ultra','Alta'],['Ultra+RT PT','Ultra+RT','Ultra+RT','Ultra'],['Ultra+RT PT','Ultra+RT','Ultra+RT','Ultra+RT']];
+function doCalc(){
+  const gi=+(document.getElementById('calc-gpu')?.value??7);
+  const ri=+(document.getElementById('calc-res')?.value??1);
+  const ci=+(document.getElementById('calc-cpu')?.value??4);
+  const mi=+(document.getElementById('calc-ram')?.value??2);
+  const idx=ri*11+gi;if(idx>=FPS_DATA.length)return;
+  const base=FPS_DATA[idx];
+  const lo=Math.max(1,Math.round(base[0]*CPU_M[ci]*RAM_M[mi]));
+  const hi=Math.max(2,Math.round(base[1]*CPU_M[ci]*RAM_M[mi]));
+  const avg=(lo+hi)/2;
+  const up=UP[gi]||'DLSS';
+  const dm=up.includes('FG')?1.9:1.55;
+  const dlo=Math.round(lo*dm),dhi=Math.round(hi*(dm+.1));
+  const col=avg>=80?'var(--cyan)':avg>=55?'var(--green)':avg>=35?'var(--yellow)':'var(--red)';
+  const exp=avg>=80?'EXCELENTE':avg>=55?'MUITO BOM':avg>=35?'JOGÁVEL':avg>=20?'SOFRÍVEL':'INVIÁVEL';
+  const qual=(QUAL[gi]&&QUAL[gi][ri])||'Média';
+  const chipTxt=avg>=60?'✓ Pronto para Vice City!':avg>=35?'⚡ Use '+up+' para melhorar':'⚠ Upgrade necessário';
+  const chipCol=avg>=60?'var(--green)':avg>=35?'var(--yellow)':'var(--red)';
+  function s(id,v,c){const el=document.getElementById(id);if(el){el.textContent=v;if(c)el.style.color=c;}}
+  s('r-fps',lo+'–'+hi,col);s('r-exp',exp,col);s('r-dlss',dlo+'–'+dhi+' FPS');
+  s('r-up-lbl','Com '+up+':');s('r-qual',qual);
+  s('r-cpu',CPU_N[ci],ci<=1?'var(--red)':ci<=2?'var(--yellow)':'var(--green)');
+  s('r-ram',RAM_N[mi],RAM_C[mi]);
+  const chip=document.getElementById('r-chip');
+  if(chip){chip.textContent=chipTxt;chip.style.color=chipCol;chip.style.borderColor=chipCol;
+    chip.style.background=avg>=60?'rgba(57,255,20,.07)':avg>=35?'rgba(255,224,51,.07)':'rgba(255,49,49,.07)';}
+}
+
+// ══ CONSOLE SIDE-BY-SIDE PANELS ══
+function showConPanel(id){
+  ['ss','sx','ps5','pro'].forEach(k=>{
+    const tab=document.getElementById('cstab-'+k);
+    const panel=document.getElementById('cpanel-'+k);
+    if(tab)tab.classList.toggle('active',k===id);
+    if(panel)panel.classList.toggle('active',k===id);
+  });
+}
+
+// ══ QUIZ ══
+const QA=[];
+const QRES=[
+  {title:'XBOX SERIES S',emoji:'💸',color:'#6cb4f7',desc:'Com o orçamento disponível, o Xbox Series S é a entrada mais acessível no GTA VI. Vai rodar, mas espere a versão mais limitada visualmente. Se possível, considere o PS5.'},
+  {title:'PS5',emoji:'🎮',color:'#4f8fff',desc:'O PS5 é a escolha certa para você! Excelente custo-benefício, DualSense com haptic feedback exclusivos, dois modos gráficos e SSD ultra-rápido. A melhor experiência dentro do seu perfil.'},
+  {title:'XBOX SERIES X',emoji:'🟢',color:'var(--blue)',desc:'O Xbox Series X é uma escolha sólida! GPU poderosa, 4K upscaled e compatibilidade com Game Pass. Ideal para quem está no ecossistema Xbox.'},
+  {title:'PS5 PRO',emoji:'👑',color:'var(--cyan)',desc:'O PS5 Pro é feito para você! 4K PSSR, ray tracing completo, 60fps estáveis, haptics exclusivos do DualSense e o selo PS5 Pro Enhanced confirmado. A melhor experiência possível no lançamento.'},
+  {title:'PC — 2027',emoji:'🖥️',color:'var(--green)',desc:'Você é do time PC! Faz total sentido esperar a versão de 2027 com ray tracing completo, mods, resolução ilimitada e FPS sem teto. Vai valer a espera.'},
+];
+function qAns(step,ans){
+  QA[step]=ans;
+  const pip=document.getElementById('qpip-'+step);if(pip){pip.classList.remove('now');pip.classList.add('done');}
+  const npip=document.getElementById('qpip-'+(step+1));if(npip)npip.classList.add('now');
+  const cur=document.getElementById('qs-'+step);if(cur)cur.classList.remove('active');
+  if(step<4){const nx=document.getElementById('qs-'+(step+1));if(nx)nx.classList.add('active');}
+  else{
+    let sc={ss:0,ps5:0,sx:0,pro:0,pc:0};
+    if(QA[0]===0)sc.ss+=3;else if(QA[0]===1){sc.ps5+=2;sc.sx+=2;}else if(QA[0]===2)sc.pro+=2;else sc.pro+=3;
+    if(QA[1]===1)sc.ps5+=2;else if(QA[1]===2)sc.sx+=2;else if(QA[1]===3)sc.pc+=2;
+    if(QA[2]===0){sc.pro+=3;sc.ps5+=1;}else if(QA[2]===1){sc.ps5+=3;sc.pro+=2;}else if(QA[2]===2){sc.pro+=2;sc.ps5+=1;}else{sc.ss+=2;sc.ps5+=1;}
+    if(QA[3]===0){sc.pro+=2;sc.ps5+=1;}if(QA[4]===2)sc.pc+=5;
+    const best=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0][0];
+    const map={ss:0,ps5:1,sx:2,pro:3,pc:4};const res=QRES[map[best]];
+    const el=id=>document.getElementById(id);
+    if(el('qr-emoji'))el('qr-emoji').textContent=res.emoji;
+    if(el('qr-title')){el('qr-title').textContent=res.title;el('qr-title').style.color=res.color;}
+    if(el('qr-desc'))el('qr-desc').textContent=res.desc;
+    document.querySelectorAll('.qp-pip').forEach(p=>{p.classList.remove('now');p.classList.add('done');});
+    const r=document.getElementById('qs-result');if(r)r.classList.add('active');
+  }
+}
+function restartQuiz(){
+  QA.length=0;
+  document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.qp-pip').forEach(p=>{p.classList.remove('done','now');});
+  const s0=document.getElementById('qs-0');const p0=document.getElementById('qpip-0');
+  if(s0)s0.classList.add('active');if(p0)p0.classList.add('now');
+}
+
+// ══ VOTING ══
+const VKEY='gtavi_rob_v3';let votes=[0,0,0,0,0,0],voted=false;
+try{const d=JSON.parse(localStorage.getItem(VKEY)||'{}');votes=d.votes||votes;voted=d.voted||false;}catch(e){}
+function renderVotes(){
+  const total=votes.reduce((a,b)=>a+b,0);
+  votes.forEach((v,i)=>{const pct=total?Math.round(v/total*100):0;const b=document.getElementById('vbar-'+i);const p=document.getElementById('vpct-'+i);if(b)b.style.width=pct+'%';if(p)p.textContent=pct+'%';});
+  const t=document.getElementById('vote-total');if(t)t.textContent=total+(total===1?' voto':' votos')+' registrado'+(total===1?'':'s')+'!';
+  if(voted)document.querySelectorAll('.vote-btn').forEach(b=>{b.disabled=true;b.style.opacity='.5';});
+}
+function doVote(i){if(voted)return;votes[i]++;voted=true;try{localStorage.setItem(VKEY,JSON.stringify({votes,voted}));}catch(e){}renderVotes();}
+renderVotes();
+
+// ══ FAQ ══
+function faqToggle(el){const item=el.parentElement,open=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');}
+
+// ══ SHARE ══
+
+
+
+// ══ FADE OBSERVER ══
+(function(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.07});
+  document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+})();
+
+// ══ INIT ══
+document.addEventListener('DOMContentLoaded',function(){
+  const modal=document.getElementById('video-modal');
+  if(modal)modal.addEventListener('click',e=>{if(e.target===modal)closeVideoModal();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVideoModal();});
+  doCalc();
+});
+
+// ══ LIGHTBOX (minimal) ══
+function closeLightbox(){
+  const lb=document.getElementById('lightbox');
+  if(lb)lb.classList.remove('open');
+  document.body.style.overflow='';
+}
+function lbNav(d){} // placeholder — gallery removed
+</script>
+
+</body>
+</html>
